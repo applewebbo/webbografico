@@ -194,4 +194,4 @@ cython_debug/
 #.idea/
 
 # Tailwind CSS development
-static/css/tailwind.css
+tailwind.css
