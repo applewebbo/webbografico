@@ -195,3 +195,10 @@ cython_debug/
 
 # Tailwind CSS development
 tailwind.css
+node_modules/
+bun.lockb
+package.json
+
+
+# Various
+.ruff_cache/
