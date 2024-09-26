@@ -12,8 +12,28 @@ readme = "README.md"
 requires-python = ">=3.12"
 version = "0.1.0"
 
+[tool.coverage.run]
+branch = true
+omit = ['*/.venv/*', '*/migrations/*', '*/tests/*', '*/test_*.py', '*/settings/*', '*/wsgi.py', '*/asgi.py', '*/manage.py']
+
+[tool.djlint]
+ignore = "T002,H006"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "core.settings"
+'addopts' = "--nomigrations --cov=. --cov-report html:htmlcov --cov-report term:skip-covered --cov-fail-under 100"
+python_files = "test_*.py"
+testpaths = ["tests"]
+
 [tool.uv]
 dev-dependencies = [
+  "coverage[toml]>=7.6.1",
+  "django-coverage-plugin>=3.1.0",
+  "django-test-plus>=2.2.4",
   "djlint>=1.35.2",
+  "pytest-cov>=5.0.0",
+  "pytest-django>=4.9.0",
+  "pytest-mock>=3.14.0",
+  "pytest-xdist>=3.6.1",
   "pywatchman>=2.0.0"
 ]
