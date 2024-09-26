@@ -11,6 +11,15 @@ wheels = [
 ]
 
 [[package]]
+name = "certifi"
+version = "2024.8.30"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/b0/ee/9b19140fe824b367c04c5e1b369942dd754c4c5462d5674002f75c4dedc1/certifi-2024.8.30.tar.gz", hash = "sha256:bec941d2aa8195e248a60b31ff9f0558284cf01a52591ceda73ea9afffd69fd9", size = 168507 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/12/90/3c9ff0512038035f59d279fddeb79f5f1eccd8859f06d6163c58798b9487/certifi-2024.8.30-py3-none-any.whl", hash = "sha256:922820b53db7a7257ffbda3f597266d435245903d80737e34f8a45ff3e3230d8", size = 167321 },
+]
+
+[[package]]
 name = "click"
 version = "8.1.7"
 source = { registry = "https://pypi.org/simple" }
@@ -57,12 +66,63 @@ wheels = [
 ]
 
 [[package]]
+name = "django-browser-reload"
+version = "1.15.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "asgiref" },
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ee/85/51b753207a37c85f9af458daf5d501f8e4529ff49c66254f1cd33c98c635/django_browser_reload-1.15.0.tar.gz", hash = "sha256:ed094386c587a95ff4f34a0d302ecd58f15e919784c4c76a97f7cb977446104c", size = 14579 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/76/96/ad37ea95d4cc3244c8b19ad01e546d52aadbdc06d770f4d26b2da57ac349/django_browser_reload-1.15.0-py3-none-any.whl", hash = "sha256:55b72335568b988e3a2beddb1703db6951516355925d3fc9c587f0bbd9e8efaa", size = 12280 },
+]
+
+[[package]]
 name = "django-environ"
 version = "0.11.2"
 source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/d6/0b/f2c024529ee4bbf8b95176eebeb86c6e695192a9ce0e91059cb83a33c1d3/django-environ-0.11.2.tar.gz", hash = "sha256:f32a87aa0899894c27d4e1776fa6b477e8164ed7f6b3e410a62a6d72caaf64be", size = 54326 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c4/f1/468b49cccba3b42dda571063a14c668bb0b53a1d5712426d18e36663bd53/django_environ-0.11.2-py2.py3-none-any.whl", hash = "sha256:0ff95ab4344bfeff693836aa978e6840abef2e2f1145adff7735892711590c05", size = 19141 },
+]
+
+[[package]]
+name = "django-fastdev"
+version = "1.10.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ba/96/0c8d2d56356292cd2f5439d42865274c16b89c2699fbe73f908b8619a813/django_fastdev-1.10.0.tar.gz", hash = "sha256:3eb8d712b2f6fade0e0efb7b9efb0e99c587a1235c9d1c7781c2ae5ae8d14ec6", size = 14767 }
+
+[[package]]
+name = "django-tailwind-cli"
+version = "2.16.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "certifi" },
+    { name = "django" },
+    { name = "django-typer" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6a/6b/e7e67f31348a4fa03ec64f67c92464c709bdfbed3e1cc45825eac828de92/django_tailwind_cli-2.16.0.tar.gz", hash = "sha256:e47c1eaba142b0411b75e9bdcc3ac2cbf26c85cdf3c683596d4d779986f3d00d", size = 40801 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/64/b8/a19967904184a03fae2ef64b847eac2b3533a4cea6775d6e551b6948ba61/django_tailwind_cli-2.16.0-py3-none-any.whl", hash = "sha256:30eb796aea5a4e029779e4be41e635c9542065787c74c1e2e6248eae0390a9d6", size = 11605 },
+]
+
+[[package]]
+name = "django-typer"
+version = "2.2.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "click" },
+    { name = "django" },
+    { name = "shellingham" },
+    { name = "typer-slim" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/32/89/0d45bb83edca98638e558594ae3b96ac37fe6dea53dd1790b4d917407e7f/django_typer-2.2.2.tar.gz", hash = "sha256:c63f294a3bed1156bdd0a8487f4a1aee6247fb9f11d9ba8de8ce25eff5ce80bc", size = 54140 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/82/e6/4434994dd64e14d97338dfca0bc38ee1f37e4f155916172863649ed19194/django_typer-2.2.2-py3-none-any.whl", hash = "sha256:ad88bd590834402dd5b464e860960f75be7ab83b885bdc41f202b731e16b6dc3", size = 55538 },
 ]
 
 [[package]]
@@ -140,6 +200,15 @@ wheels = [
 ]
 
 [[package]]
+name = "pywatchman"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/cf/39/fc10dd952ac72a3a293936cd66a4551fdeb9012d2db99234a376100641ce/pywatchman-2.0.0.tar.gz", hash = "sha256:25354d9e3647f94411a4c13e510c83a1ceecc17977b0525ba41b16e7019c7b0c", size = 40570 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/51/7f/5d68d803489770cffa5d2b44be99b978c866f8a4d8e835f9da850415ed8a/pywatchman-2.0.0-cp312-cp312-macosx_14_0_arm64.whl", hash = "sha256:51c2b4c72bea6b9fd90caf20759f5bc47febf0fd27bf2f247b87c66e2f6bab02", size = 52557 },
+]
+
+[[package]]
 name = "pyyaml"
 version = "6.0.2"
 source = { registry = "https://pypi.org/simple" }
@@ -204,6 +273,15 @@ wheels = [
 ]
 
 [[package]]
+name = "shellingham"
+version = "1.5.4"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/58/15/8b3609fd3830ef7b27b655beb4b4e9c62313a4e8da8c676e142cc210d58e/shellingham-1.5.4.tar.gz", hash = "sha256:8dbca0739d487e5bd35ab3ca4b36e11c4078f3a234bfce294b0a0291363404de", size = 10310 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e0/f9/0595336914c5619e5f28a1fb793285925a8cd4b432c9da0a987836c7f822/shellingham-1.5.4-py2.py3-none-any.whl", hash = "sha256:7ecfff8f2fd72616f7481040475a65b2bf8af90a56c89140852d1120324e8686", size = 9755 },
+]
+
+[[package]]
 name = "six"
 version = "1.16.0"
 source = { registry = "https://pypi.org/simple" }
@@ -234,6 +312,28 @@ wheels = [
 ]
 
 [[package]]
+name = "typer-slim"
+version = "0.12.5"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "click" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d0/4d/d79c0dd7f8df554fb6810528a61430e7e74de76fd83f03db1bcb25906678/typer_slim-0.12.5.tar.gz", hash = "sha256:c8e3fcf93cc7dd584036df8755d2e2363f85f8a4dd028c7911eed3f00cf0ebb1", size = 99015 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/98/d4/ced1f8074819b43804a0a5015f33bae422330e8d38b1992be91fa947190c/typer_slim-0.12.5-py3-none-any.whl", hash = "sha256:9a994f721b828783dbf144e17461b1c720bb4598e0d5eff7c1b3f08ee58cb062", size = 47110 },
+]
+
+[[package]]
+name = "typing-extensions"
+version = "4.12.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/df/db/f35a00659bc03fec321ba8bce9420de607a1d37f8342eee1863174c69557/typing_extensions-4.12.2.tar.gz", hash = "sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8", size = 85321 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/26/9f/ad63fc0248c5379346306f8668cda6e2e2e9c95e01216d2b8ffd9ff037d0/typing_extensions-4.12.2-py3-none-any.whl", hash = "sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d", size = 37438 },
+]
+
+[[package]]
 name = "tzdata"
 version = "2024.2"
 source = { registry = "https://pypi.org/simple" }
@@ -248,19 +348,29 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "django" },
+    { name = "django-browser-reload" },
     { name = "django-environ" },
+    { name = "django-fastdev" },
+    { name = "django-tailwind-cli" },
 ]
 
 [package.dev-dependencies]
 dev = [
     { name = "djlint" },
+    { name = "pywatchman" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "django", specifier = ">=5.1.1" },
+    { name = "django-browser-reload", specifier = ">=1.15.0" },
     { name = "django-environ", specifier = ">=0.11.2" },
+    { name = "django-fastdev", specifier = ">=1.10.0" },
+    { name = "django-tailwind-cli", specifier = ">=2.16.0" },
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "djlint", specifier = ">=1.35.2" }]
+dev = [
+    { name = "djlint", specifier = ">=1.35.2" },
+    { name = "pywatchman", specifier = ">=2.0.0" },
+]
