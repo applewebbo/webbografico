@@ -17,6 +17,9 @@ module.exports = {
       },
     },
   },
+  daisyui: {
+    themes: ["sunset"],
+  },
   plugins: [
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
