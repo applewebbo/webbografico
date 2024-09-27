@@ -28,7 +28,7 @@ update package:
 
 # Run database migrations
 migrate:
-    python manage.py migrate --settings=core.settings.development
+    python manage.py migrate
 
 # Run tests
 test:
@@ -37,17 +37,3 @@ test:
 # Run fast tests
 ftest:
     pytest -n 8 --reuse-db
-
-# Run tests excluding mapbox and generate coverage report
-mptest:
-    COVERAGE_CORE=sysmon python -m pytest -m "not mapbox" --cov-report html:htmlcov --cov-report term:skip-covered --cov-fail-under 100
-
-# Set up Docker database
-dockerdb:
-    docker compose exec web python manage.py flush --no-input --settings=core.settings.production
-    docker compose exec web python manage.py migrate --settings=core.settings.production
-    docker compose exec web python manage.py populate_trips --settings=core.settings.production
-
-# Run the cluster
-cluster:
-    python manage.py qcluster --settings=core.settings.development
