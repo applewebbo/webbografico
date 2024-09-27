@@ -21,16 +21,17 @@ jobs:
       with:
         github-token: ${{ secrets.MY_GITHUB_TOKEN }}
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
+    - name: Install astral/uv
+      uses: astral-sh/setup-uv@v3
       with:
-        python-version: '3.12'
+        enable-cache: true
+        github-token: ${{ secrets.MY_GITHUB_TOKEN }}
 
-    - name: Install Python packages
-      uses: yezz123/setup-uv@v4
-      with:
-        uv-venv: .venv
-    - run: just requirements
+    - name: Install Python
+      run: uv python install 3.12
+
+    - name: Install Packages
+      run: just requirements
 
     - name: Test it
       run: just test
