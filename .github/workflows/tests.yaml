@@ -16,11 +16,6 @@ jobs:
     - name: Get the code
       uses: actions/checkout@v3
 
-    - name: Install Just
-      uses: extractions/setup-just@v2
-      with:
-        github-token: ${{ secrets.MY_GITHUB_TOKEN }}
-
     - name: Install astral/uv
       uses: astral-sh/setup-uv@v3
       with:
@@ -31,7 +26,7 @@ jobs:
       run: uv python install 3.12
 
     - name: Install Packages
-      run: just requirements
+      run: uv sync --all-extras
 
     - name: Test it
-      run: just test
+      run: uv run --config-setting COVERAGE_CORE=sysmon python -m pytest --reuse-db -s
