@@ -16,7 +16,7 @@ local:
 
 # Install requirements
 requirements:
-    uv sync
+    uv sync --all-extras
 
 # Update all packages
 update_all:
