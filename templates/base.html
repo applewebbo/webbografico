@@ -1,4 +1,4 @@
-{% load tailwind_cli %}
+{% load static tailwind_cli %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,6 +15,9 @@
         </title>
         <!-- TAILWINDCSS -->
         {% tailwind_css %}
+        <!-- ALPINEJS -->
+        <script defer src="{% static 'js/alpine-collapse.min.js' %}"></script>
+        <script defer src="{% static 'js/alpine.min.js' %}"></script>
     </head>
     <body>
         {% include 'navbar.html' %}
