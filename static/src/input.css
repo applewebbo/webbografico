@@ -6,4 +6,8 @@
     #hero {
         background-image: url("../img/hero_image.jpg");
     }
+
+    h1.section-title {
+        @apply text-4xl font-bold text-center mb-4;
+    }
 }

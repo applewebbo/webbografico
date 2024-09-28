@@ -1,0 +1,16 @@
+{% load static %}
+<div class="mx-auto max-w-xs bg-white rounded-lg border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700 lg:max-widht-md">
+    <a href="#">
+        <img class="bg-gradient-to-b to-transparent rounded-t-lg from-primary-content" src="{% static 'img/website.png' %}" alt="" />
+    </a>
+    <div class="p-5 text-center md:text-left">
+        <a href="#">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ title }}</h5>
+        </a>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ slot }}</p>
+        <a href="#" class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg dark:bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Vedi Progetto
+             {% heroicon_solid "arrow-long-right" class="size-4 ms-2" %}
+        </a>
+    </div>
+</div>
