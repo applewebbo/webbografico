@@ -222,6 +222,20 @@ wheels = [
 ]
 
 [[package]]
+name = "heroicons"
+version = "2.8.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/14/9a/c0bfbc30db6f6d08142d83648737057ee8fe186301a75159beaf0e3a4816/heroicons-2.8.0.tar.gz", hash = "sha256:2f9b06e705caefaf7b05b93d0d1e667eecf0eadd0ed154e68f22e6597852d87f", size = 420671 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f3/23/82e1494ae61e2ad441f791f09a1c5aba3fb1223dbd67db4882e881f7daf5/heroicons-2.8.0-py3-none-any.whl", hash = "sha256:4ae47658dfa9c709aabd75d3856eae7998d85b5cbf6f7d557b6af9c82622dafc", size = 415425 },
+]
+
+[package.optional-dependencies]
+django = [
+    { name = "django" },
+]
+
+[[package]]
 name = "html-tag-names"
 version = "0.1.2"
 source = { registry = "https://pypi.org/simple" }
@@ -512,6 +526,7 @@ dependencies = [
     { name = "django-environ" },
     { name = "django-fastdev" },
     { name = "django-tailwind-cli" },
+    { name = "heroicons", extra = ["django"] },
 ]
 
 [package.dev-dependencies]
@@ -534,6 +549,7 @@ requires-dist = [
     { name = "django-environ", specifier = ">=0.11.2" },
     { name = "django-fastdev", specifier = ">=1.10.0" },
     { name = "django-tailwind-cli", specifier = ">=2.16.0" },
+    { name = "heroicons", extras = ["django"], specifier = ">=2.8.0" },
 ]
 
 [package.metadata.requires-dev]
