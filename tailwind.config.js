@@ -2,6 +2,7 @@
 const plugin = require("tailwindcss/plugin");
 
 module.exports = {
+  darkMode: 'class',
   content: ["./templates/**/*.html", "**/templates/**/*.html"],
   theme: {
     extend: {},
@@ -18,7 +19,7 @@ module.exports = {
     },
   },
   daisyui: {
-    themes: ["sunset"],
+    themes: ["light"],
   },
   plugins: [
     require("@tailwindcss/typography"),

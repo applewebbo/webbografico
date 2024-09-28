@@ -5,8 +5,13 @@
 {% endblock title %}
 
 {% block content %}
-    <h1 class="flex items-center mt-5 text-3xl font-bold text-primary">
-        TailwindCSS is working!
-        <span class="badge badge-success badge-md ms-2">NEW</span>
-    </h1>
+    <div id="hero" class="hero">
+        <div class="bg-opacity-60 hero-overlay"></div>
+        <div class="p-4 text-center hero-content text-neutral-content">
+            <div class="max-w-lg">
+                <h1 class="mb-5 text-6xl font-bold tracking-tight">Benvenuti</h1>
+                <p class="mb-5 text-xl font-semibold">Qui potete trovare il mio blog e i miei progetti...</p>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
