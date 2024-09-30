@@ -138,15 +138,6 @@ wheels = [
 ]
 
 [[package]]
-name = "django-fastdev"
-version = "1.10.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/ba/96/0c8d2d56356292cd2f5439d42865274c16b89c2699fbe73f908b8619a813/django_fastdev-1.10.0.tar.gz", hash = "sha256:3eb8d712b2f6fade0e0efb7b9efb0e99c587a1235c9d1c7781c2ae5ae8d14ec6", size = 14767 }
-
-[[package]]
 name = "django-tailwind-cli"
 version = "2.16.0"
 source = { registry = "https://pypi.org/simple" }
@@ -524,7 +515,6 @@ dependencies = [
     { name = "django" },
     { name = "django-browser-reload" },
     { name = "django-environ" },
-    { name = "django-fastdev" },
     { name = "django-tailwind-cli" },
     { name = "heroicons", extra = ["django"] },
 ]
@@ -547,7 +537,6 @@ requires-dist = [
     { name = "django", specifier = ">=5.1.1" },
     { name = "django-browser-reload", specifier = ">=1.15.0" },
     { name = "django-environ", specifier = ">=0.11.2" },
-    { name = "django-fastdev", specifier = ">=1.10.0" },
     { name = "django-tailwind-cli", specifier = ">=2.16.0" },
     { name = "heroicons", extras = ["django"], specifier = ">=2.8.0" },
 ]

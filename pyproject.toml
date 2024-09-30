@@ -2,7 +2,6 @@
 dependencies = [
   "django-browser-reload>=1.15.0",
   "django-environ>=0.11.2",
-  "django-fastdev>=1.10.0",
   "django-tailwind-cli>=2.16.0",
   "django>=5.1.1",
   "heroicons[django]>=2.8.0"

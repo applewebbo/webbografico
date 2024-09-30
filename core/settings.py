@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # THIRD PARTY PACKAGES
     "django_browser_reload",
-    "django_fastdev",
     "django_tailwind_cli",
     "heroicons",
     # INTERNAL APPS
@@ -94,9 +93,21 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+        "OPTIONS": {
+            "init_command": (
+                "PRAGMA foreign_keys=ON;"
+                "PRAGMA journal_mode = WAL;"
+                "PRAGMA synchronous = NORMAL;"
+                "PRAGMA busy_timeout = 5000;"
+                "PRAGMA temp_store = MEMORY;"
+                "PRAGMA mmap_size = 134217728;"
+                "PRAGMA journal_size_limit = 67108864;"
+                "PRAGMA cache_size = 2000;"
+            ),
+            "transaction_mode": "IMMEDIATE",
+        },
+    },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
