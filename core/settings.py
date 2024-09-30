@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # THIRD PARTY PACKAGES
     "django_browser_reload",
+    "django_cotton",
     "django_tailwind_cli",
     "heroicons",
     # INTERNAL APPS

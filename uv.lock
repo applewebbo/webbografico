@@ -11,6 +11,18 @@ wheels = [
 ]
 
 [[package]]
+name = "beautifulsoup4"
+version = "4.12.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "soupsieve" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b3/ca/824b1195773ce6166d388573fc106ce56d4a805bd7427b624e063596ec58/beautifulsoup4-4.12.3.tar.gz", hash = "sha256:74e3d1928edc070d21748185c46e3fb33490f22f52a3addee9aee0f4f7781051", size = 581181 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b1/fe/e8c672695b37eecc5cbf43e1d0638d88d66ba3a44c4d321c796f4e59167f/beautifulsoup4-4.12.3-py3-none-any.whl", hash = "sha256:b80878c9f40111313e55da8ba20bdba06d8fa3969fc68304167741bbf9e082ed", size = 147925 },
+]
+
+[[package]]
 name = "certifi"
 version = "2024.8.30"
 source = { registry = "https://pypi.org/simple" }
@@ -114,6 +126,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ee/85/51b753207a37c85f9af458daf5d501f8e4529ff49c66254f1cd33c98c635/django_browser_reload-1.15.0.tar.gz", hash = "sha256:ed094386c587a95ff4f34a0d302ecd58f15e919784c4c76a97f7cb977446104c", size = 14579 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/76/96/ad37ea95d4cc3244c8b19ad01e546d52aadbdc06d770f4d26b2da57ac349/django_browser_reload-1.15.0-py3-none-any.whl", hash = "sha256:55b72335568b988e3a2beddb1703db6951516355925d3fc9c587f0bbd9e8efaa", size = 12280 },
+]
+
+[[package]]
+name = "django-cotton"
+version = "1.0.12"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "beautifulsoup4" },
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6c/c1/c9ba1ca5b941946b9b276da79303d3dc69b8f7b5c205837707d3c7bc0bbb/django_cotton-1.0.12.tar.gz", hash = "sha256:9c90d6856eeb9a1605fabfc8230069bfed300f9b57f93adb80559c72e4e10569", size = 22719 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0b/fd/0438ceb527f6a6290e0875a60027e34666fb7f40ce39b674623e22c08f90/django_cotton-1.0.12-py3-none-any.whl", hash = "sha256:6591cc6810a0b15146890df66dc883adfbf2035c51da721bede5ad51e821f74d", size = 21942 },
 ]
 
 [[package]]
@@ -456,6 +481,15 @@ wheels = [
 ]
 
 [[package]]
+name = "soupsieve"
+version = "2.6"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/d7/ce/fbaeed4f9fb8b2daa961f90591662df6a86c1abf25c548329a86920aedfb/soupsieve-2.6.tar.gz", hash = "sha256:e2e68417777af359ec65daac1057404a3c8a5455bb8abc36f1a9866ab1a51abb", size = 101569 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d1/c2/fe97d779f3ef3b15f05c94a2f1e3d21732574ed441687474db9d342a7315/soupsieve-2.6-py3-none-any.whl", hash = "sha256:e72c4ff06e4fb6e4b5a9f0f55fe6e81514581fca1515028625d0f299c602ccc9", size = 36186 },
+]
+
+[[package]]
 name = "sqlparse"
 version = "0.5.1"
 source = { registry = "https://pypi.org/simple" }
@@ -514,6 +548,7 @@ source = { virtual = "." }
 dependencies = [
     { name = "django" },
     { name = "django-browser-reload" },
+    { name = "django-cotton" },
     { name = "django-environ" },
     { name = "django-tailwind-cli" },
     { name = "heroicons", extra = ["django"] },
@@ -536,6 +571,7 @@ dev = [
 requires-dist = [
     { name = "django", specifier = ">=5.1.1" },
     { name = "django-browser-reload", specifier = ">=1.15.0" },
+    { name = "django-cotton", specifier = ">=1.0.12" },
     { name = "django-environ", specifier = ">=0.11.2" },
     { name = "django-tailwind-cli", specifier = ">=2.16.0" },
     { name = "heroicons", extras = ["django"], specifier = ">=2.8.0" },
