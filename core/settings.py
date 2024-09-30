@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     # THIRD PARTY PACKAGES
     "django_browser_reload",
     "django_cotton",
-    "django_fastdev",
     "django_tailwind_cli",
     "heroicons",
     # INTERNAL APPS
