@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # THIRD PARTY PACKAGES
+    "crispy_forms",
+    "crispy_tailwind",
     "django_browser_reload",
     "django_cotton",
     "django_tailwind_cli",
@@ -89,6 +91,8 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+# https://gcollazo.com/optimal-sqlite-settings-for-django/
+
 
 DATABASES = {
     "default": {
@@ -155,3 +159,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # DJANGO-TAILWIND-CLI
 TAILWIND_CLI_SRC_CSS = BASE_DIR / "static/src/input.css"
+
+# DJANGO-CRISPY-FORMS
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"

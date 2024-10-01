@@ -91,6 +91,19 @@ wheels = [
 ]
 
 [[package]]
+name = "crispy-tailwind"
+version = "1.0.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "django-crispy-forms" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ae/ac/a307ae5ce869d7151b90d4b8b042a48eb454a936dacc695f6418486e5bd8/crispy-tailwind-1.0.3.tar.gz", hash = "sha256:2bc9f616d406e4b003f25d46fcb0079f1c2522719d97adb107667271d849459a", size = 19172 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c9/ca/11f65e24f3c182dfaf90fd3710d2dcca0fbc3026923e47b43f52a4a2349b/crispy_tailwind-1.0.3-py3-none-any.whl", hash = "sha256:31427f66b1c4fd0d6fb040f4197cfb97d104cdbe7641ea2dea940c0057c4db4b", size = 25700 },
+]
+
+[[package]]
 name = "cssbeautifier"
 version = "1.15.1"
 source = { registry = "https://pypi.org/simple" }
@@ -151,6 +164,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/ba/d2/f37452482053e82c47c6ec2626370fe1a2cd81af31e510ad90bb2cb4a081/django_coverage_plugin-3.1.0.tar.gz", hash = "sha256:223d34bf92bebadcb8b7b89932480e41c7bd98b44a8156934488fbe7f4a71f99", size = 13799 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c6/05/892bd4cbf2cd2735c1f179bc9bbcac1762f0d505957566f0d39bdcd98a64/django_coverage_plugin-3.1.0-py3-none-any.whl", hash = "sha256:eb0ea8ffdb0db11a02994fc99be6500550efb496c350d709f418ff3d8e553a67", size = 14054 },
+]
+
+[[package]]
+name = "django-crispy-forms"
+version = "2.3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/04/f6/5bce7ae3512171c7c0ca3de31689e2a1ced8b030f156fcf13d2870e5468e/django_crispy_forms-2.3.tar.gz", hash = "sha256:2db17ae08527201be1273f0df789e5f92819e23dd28fec69cffba7f3762e1a38", size = 278849 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4c/3b/5dc3faf8739d1ce7a73cedaff508b4af8f6aa1684120ded6185ca0c92734/django_crispy_forms-2.3-py3-none-any.whl", hash = "sha256:efc4c31e5202bbec6af70d383a35e12fc80ea769d464fb0e7fe21768bb138a20", size = 31411 },
 ]
 
 [[package]]
@@ -546,9 +571,11 @@ name = "webbografico"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "crispy-tailwind" },
     { name = "django" },
     { name = "django-browser-reload" },
     { name = "django-cotton" },
+    { name = "django-crispy-forms" },
     { name = "django-environ" },
     { name = "django-tailwind-cli" },
     { name = "heroicons", extra = ["django"] },
@@ -569,9 +596,11 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "crispy-tailwind", specifier = ">=1.0.3" },
     { name = "django", specifier = ">=5.1.1" },
     { name = "django-browser-reload", specifier = ">=1.15.0" },
     { name = "django-cotton", specifier = ">=1.0.12" },
+    { name = "django-crispy-forms", specifier = ">=2.3" },
     { name = "django-environ", specifier = ">=0.11.2" },
     { name = "django-tailwind-cli", specifier = ">=2.16.0" },
     { name = "heroicons", extras = ["django"], specifier = ">=2.8.0" },
