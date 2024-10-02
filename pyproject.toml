@@ -16,6 +16,13 @@ readme = "README.md"
 requires-python = ">=3.12"
 version = "0.1.0"
 
+[tool.bandit]
+skips = ["B101", "B311"]
+
+[tool.coverage.report]
+exclude_also = [
+]
+
 [tool.coverage.run]
 branch = true
 omit = ['*/.venv/*', '*/migrations/*', '*/tests/*', '*/test_*.py', '*/settings/*', '*/wsgi.py', '*/asgi.py', '*/manage.py']
