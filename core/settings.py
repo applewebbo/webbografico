@@ -22,6 +22,12 @@ env = environ.Env(
     ACCOUNT_DEFAULT_HTTP_PROTOCOL=(str, "https"),
     ALLOWED_HOSTS=(list, []),
     DEBUG=(bool, False),
+    EMAIL_HOST=(str, None),
+    EMAIL_PORT=(str, "587"),
+    EMAIL_HOST_USER=(str, None),
+    EMAIL_HOST_PASSWORD=(str, None),
+    EMAIL_USE_TLS=(bool, False),
+    EMAIL_USE_SSL=(bool, True),
 )
 
 # # Take environment variables from .env file
@@ -44,6 +50,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # THIRD PARTY PACKAGES
+    "anymail",
+    "crispy_forms",
+    "crispy_tailwind",
     "django_browser_reload",
     "django_cotton",
     "django_tailwind_cli",
@@ -89,6 +98,8 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+# https://gcollazo.com/optimal-sqlite-settings-for-django/
+
 
 DATABASES = {
     "default": {
@@ -155,3 +166,18 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # DJANGO-TAILWIND-CLI
 TAILWIND_CLI_SRC_CSS = BASE_DIR / "static/src/input.css"
+
+# DJANGO-CRISPY-FORMS
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
+
+# DJANGO_ANYMAIL
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+DEFAULT_FROM_EMAIL = "info@mg.webbografico.com"
+ADMIN_EMAIL = env("ADMIN_EMAIL")
+
+ANYMAIL = {
+    "MAILGUN_API_KEY": env("MAILGUN_API_KEY"),
+    "MAILGUN_API_URL": env("MAILGUN_API_URL"),
+    "MAILGUN_SENDER_DOMAIN": env("MAILGUN_SENDER_DOMAIN"),
+}

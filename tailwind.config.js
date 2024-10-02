@@ -3,7 +3,11 @@ const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   darkMode: 'class',
-  content: ["./templates/**/*.html", "**/templates/**/*.html"],
+  content: [
+    "./templates/**/*.html",
+    "**/templates/**/*.html",
+    // https://noumenal.es/notes/tailwind/django-integration/ but breaks Tailwind Intellisense in VSCode so added manually
+    ".venv/lib/python3.12/site-packages/crispy_tailwind/templates/**/*.html",],
   theme: {
     extend: {},
   },
