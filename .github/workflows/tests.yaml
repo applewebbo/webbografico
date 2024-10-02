@@ -8,8 +8,12 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-22.04
     env:
+      ADMIN_EMAIL: admin@example.com
       ALLOWED_HOSTS: '*'
       DEBUG: on
+      MAILGUN_API_KEY: key-123
+      MAILGUN_API_URL: http://localhost:8000
+      MAILGUN_SENDER_DOMAIN: sandbox123.mailgun.org
       SECRET_KEY: a secret to everybody
 
     steps:
