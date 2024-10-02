@@ -1,6 +1,7 @@
 from django.conf import settings
+from django.contrib import messages
 from django.core.mail import send_mail
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .forms import ContactForm
 
@@ -22,7 +23,12 @@ def contact(request):
             [settings.ADMIN_EMAIL],
             fail_silently=False,
         )
-        return render(request, "core/contact-success.html")
+        messages.add_message(
+            request,
+            messages.SUCCESS,
+            "Messaggio inviato con successo",
+        )
+        return redirect("index")
 
     context = {"form": form, "create": True}
     return render(request, "core/contact.html", context)
