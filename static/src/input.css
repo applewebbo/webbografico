@@ -10,6 +10,10 @@
     h1.section-title {
         @apply text-4xl font-bold text-center mb-8;
     }
+
+    li > a.current {
+        @apply text-primary-content bg-primary;
+    }
 }
 
 [x-cloak] { display: none !important; }
