@@ -2,7 +2,6 @@
 const plugin = require("tailwindcss/plugin");
 
 module.exports = {
-  darkMode: 'class',
   content: [
     "./templates/**/*.html",
     "**/templates/**/*.html",
@@ -11,6 +10,7 @@ module.exports = {
   theme: {
     extend: {},
   },
+  darkMode: ['selector', '[data-theme="dracula"]'],
   theme: {
     container: {
       padding: {
@@ -23,7 +23,7 @@ module.exports = {
     },
   },
   daisyui: {
-    themes: ["light"],
+    themes: ["light", "dracula"],
   },
   plugins: [
     require("@tailwindcss/typography"),

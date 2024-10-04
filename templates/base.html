@@ -1,6 +1,8 @@
 {% load static tailwind_cli %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      x-data="{darkMode: $persist('light')}"
+      x-bind:data-theme="darkMode ? 'dracula' : 'light'">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,9 +19,10 @@
         {% tailwind_css %}
         <!-- ALPINEJS -->
         <script defer src="{% static 'js/alpine-collapse.min.js' %}"></script>
+        <script defer src="{% static 'js/alpine-persist.min.js' %}"></script>
         <script defer src="{% static 'js/alpine.min.js' %}"></script>
     </head>
-    <body>
+    <body class="bg-base-200">
         {% include 'navbar.html' %}
         <div class="container pt-8 mx-auto lg:pt-12">
             {% block content %}
