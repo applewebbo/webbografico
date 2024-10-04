@@ -1,11 +1,20 @@
 {% load heroicons static %}
 <div x-data="{ open: false }">
-    <nav class="border-b shadow-md bg-base-100 border-slate-200">
+    <nav class="border-b shadow-md bg-base-100 border-base-300">
         <div class="flex flex-wrap justify-between items-center py-6 px-4 mx-auto max-w-screen-lg">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse grow">
                 <img src="{% static 'img/logo-panda.png' %}" class="h-8" alt="Logo">
                 <span class="self-center text-base font-semibold tracking-tight whitespace-nowrap md:text-2xl dark:text-white">WEBBOgrafico</span>
             </a>
+            <!-- theme controller -->
+            <div id="theme-controller" x-cloak class="inline-flex gap-2 items-center md:order-3">
+                <button class="mr-2" x-on:click="darkMode = false" x-show="darkMode">
+                    {% heroicon_solid "sun" class="size-6" %}
+                </button>
+                <button class="mr-2" x-on:click="darkMode = true" x-show="!darkMode">
+                    {% heroicon_outline "moon" class="size-6" %}
+                </button>
+            </div>
             <div class="flex items-end space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
                 <button type="button"
                         class="inline-flex justify-center items-center p-2 w-10 h-10 text-sm text-gray-500 rounded-lg md:hidden dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
