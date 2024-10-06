@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "heroicons",
     # INTERNAL APPS
     "core",
+    "projects",
 ]
 
 MIDDLEWARE = [
