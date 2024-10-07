@@ -14,6 +14,14 @@ bootstrap:
 local:
     python manage.py tailwind runserver
 
+lint:
+    uv run ruff check --fix --unsafe-fixes .
+    uv run ruff format .
+    just _pre-commit run --all-files
+
+_pre-commit *args:
+    uvx --with pre-commit-uv pre-commit {{ args }}
+
 # Install requirements
 requirements:
     uv sync --all-extras
