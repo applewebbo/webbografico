@@ -31,8 +31,8 @@ update_all:
     uv sync --upgrade
 
 # Update a specific package
-update package:
-    uv sync --upgrade-package
+update *package:
+    uv sync --upgrade-package {{ package }}
 
 # Run database migrations
 migrate:
@@ -40,8 +40,8 @@ migrate:
 
 # Run tests
 test:
-    COVERAGE_CORE=sysmon python -m pytest --reuse-db -s
+    uv run pytest --reuse-db -s
 
 # Run fast tests
 ftest:
-    pytest -n 8 --reuse-db
+    uv run pytest -n 8 --reuse-db
