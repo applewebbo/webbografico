@@ -9,4 +9,5 @@ urlpatterns = [
     path("contact/", views.contact, name="contact"),
     path("projects/", include("projects.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
+    path("tinymce/", include("tinymce.urls")),
 ]

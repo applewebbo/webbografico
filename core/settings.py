@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "django_cotton",
     "django_tailwind_cli",
     "heroicons",
+    "tinymce",
     # INTERNAL APPS
     "core",
     "projects",

@@ -7,6 +7,7 @@ dependencies = [
   "django-crispy-forms>=2.3",
   "django-environ>=0.11.2",
   "django-tailwind-cli>=2.16.0",
+  "django-tinymce>=4.1.0",
   "django>=5.1.1",
   "heroicons[django]>=2.8.0",
   "pillow>=10.4.0"
@@ -47,5 +48,6 @@ dev-dependencies = [
   "pytest-django>=4.9.0",
   "pytest-mock>=3.14.0",
   "pytest-xdist>=3.6.1",
-  "pywatchman>=2.0.0"
+  "pywatchman>=2.0.0",
+  "ruff>=0.6.9"
 ]

@@ -1,5 +1,6 @@
 from django import forms
 from django.db import models
+from tinymce.widgets import TinyMCE
 
 from projects.models import Project
 
@@ -21,4 +22,5 @@ class CustomProjectForm(forms.ModelForm):
         help_texts = {
             "hero_image": "Please, upload an image with a resolution of 1280x720",
         }
+        widgets = {"description": TinyMCE(attrs={"cols": 80, "rows": 30})}
         formfield_callback = urlfields_assume_https
