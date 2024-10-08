@@ -6,8 +6,9 @@ from projects.forms import CustomProjectForm
 
 
 @admin.register(Project)
-class SchoolAdmin(admin.ModelAdmin):
+class ProjectAdmin(admin.ModelAdmin):
     form = CustomProjectForm
+    prepopulated_fields = {"slug": ("title",)}
 
 
 @admin.register(Tech)

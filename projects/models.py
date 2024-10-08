@@ -19,6 +19,7 @@ class Image(models.Model):
 
 class Project(models.Model):
     title = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100)
     description = models.TextField()
     hero_image = models.ImageField(upload_to="img/projects/", default="img/website.png")
     images = models.ManyToManyField(Image, related_name="projects", blank=True)
