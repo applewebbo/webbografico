@@ -12,6 +12,7 @@ def projects_list(request):
 
 
 def project_detail(request, slug):
-    project = get_object_or_404(Project, slug=slug)
+    qs = Project.objects.prefetch_related("images", "technologies")
+    project = get_object_or_404(qs, slug=slug)
     context = {"project": project}
     return render(request, "projects/project-detail.html", context)

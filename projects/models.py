@@ -1,4 +1,5 @@
 from django.db import models
+from projects.utils import image_resize
 
 
 class Tech(models.Model):
@@ -31,3 +32,7 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        image_resize(self.hero_image, 1024, 1024)
+        super().save(*args, **kwargs)
