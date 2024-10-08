@@ -6,22 +6,26 @@
 
 {% block content %}
 <h1 class="my-8 text-4xl font-bold tracking-tight text-center">{{ project.title }}</h1>
-<div class="grid grid-cols-3 gap-6 mb-8">
+<div class="grid grid-cols-2 gap-6 mb-8 lg:grid-cols-3">
     <div class="col-span-2">
         <img src="{{ project.hero_image.url }}" alt="{{ project.title }} marketing image" class="w-full rounded-xl">
     </div>
-    <div class="col-span-1 card bg-base-100">
+    <div class="col-span-2 lg:col-span-1 card bg-base-100">
         <div class="card-body">
-            <h3 class="card-title">Technologies</h3>
-            <div class="flex flex-wrap gap-2 mb-4">
-                {% for tech in project.technologies.all %}
-                <div class="rounded badge badge-accent">{{ tech.name }}</div>
-                {% endfor %}
-            </div>
-            <div id="project-links" class="flex flex-col gap-4 my-4">
-                <a href="#" class="btn btn-secondary btn-block">View Code</a>
-                <a href="#" class="btn btn-secondary btn-block">Preview Site</a>
-            </div>
+            <div class="grid grid-cols-2 gap-4 lg:gap-2">
+                <div class="lg:col-span-2">
+                    <h3 class="mb-3 card-title">Technologies</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        {% for tech in project.technologies.all %}
+                        <div class="rounded badge badge-accent">{{ tech.name }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div id="project-links" class="flex flex-col gap-4 my-4 lg:col-span-2">
+                    <a href="#" class="btn btn-secondary btn-block">View Code</a>
+                    <a href="#" class="btn btn-secondary btn-block">Preview Site</a>
+                </div>
+        </div>
 
         </div>
 
