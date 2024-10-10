@@ -23,8 +23,9 @@ class Image(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            crop_image_16_9(self.image, max_width=512)
+        if not self.pk:  # Only process the image if it's a new object
+            file_object = crop_image_16_9(self.image, max_width=512)
+            self.image.save(self.image.name, file_object, save=False)
         super().save(*args, **kwargs)
 
     def __str__(self):

@@ -39,24 +39,19 @@ def image_resize(image, width, height):
 
 def crop_image_16_9(image, max_width=512):
     img = Image.open(image)
+
+    # Resize to max_width while maintaining aspect ratio
+    img.thumbnail((max_width, max_width * 9 // 16), Image.LANCZOS)
+
     width, height = img.size
+    target_height = width * 9 // 16
 
-    # Resize if width is greater than max_width
-    if width > max_width:
-        height = int(max_width * height / width)
-        width = max_width
-        img = img.resize((width, height), Image.LANCZOS)
-
-    # Calculate the target height for 16:9 aspect ratio
-    target_height = int(width * 9 / 16)
-
-    if height > target_height:
-        # If the image is too tall, crop it
-        left = 0
-        top = (height - target_height) // 2
-        right = width
-        bottom = top + target_height
-        img = img.crop((left, top, right, bottom))
+    # Crop to 16:9 aspect ratio
+    left = 0
+    top = (height - target_height) // 2
+    right = width
+    bottom = top + target_height
+    img = img.crop((left, top, right, bottom))
 
     # Save the cropped image
     img_filename = Path(image.file.name).name
@@ -67,5 +62,4 @@ def crop_image_16_9(image, max_width=512):
     img.save(buffer, format=img_format)
     file_object = File(buffer)
 
-    # Instead of saving directly, return the file object
     return file_object
