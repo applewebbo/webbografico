@@ -1,7 +1,7 @@
 {% load static %}
 <div class="mx-auto max-w-xs border shadow-md border-base-300 card bg-base-100 lg:max-width-md">
     <a href="#">
-        <img class="rounded-t-lg" src="{% static 'img/website.png' %}" alt="" />
+        <img class="rounded-t-lg" src="{% static 'img/website.jpg' %}" alt="" />
     </a>
     <div class="card-body">
         <div class="text-center md:text-left">
@@ -9,7 +9,7 @@
                 <h3 class="mb-2 text-2xl font-semibold tracking-tight card-title">{{ title }}</h3>
             </a>
             <div class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ slot }}</div>
-            <a href="#" class="inline-flex items-center btn btn-sm btn-primary">
+            <a href="{% url 'project_detail' id %}" class="inline-flex items-center btn btn-sm btn-primary">
                 Vedi Progetto
                 {% heroicon_solid "arrow-long-right" class="size-4 ms-2" %}
             </a>

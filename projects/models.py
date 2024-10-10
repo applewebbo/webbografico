@@ -1,4 +1,5 @@
 from django.db import models
+
 from projects.utils import image_resize
 
 
@@ -17,6 +18,13 @@ class Image(models.Model):
     image = models.ImageField(upload_to="img/projects/")
     alt_text = models.CharField(max_length=100)
 
+    def save(self, *args, **kwargs):
+        image_resize(self.image, 512, 512)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.alt_text
+
 
 class Project(models.Model):
     title = models.CharField(max_length=100)
@@ -34,5 +42,6 @@ class Project(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        image_resize(self.hero_image, 1024, 1024)
+        if self.hero_image:
+            image_resize(self.hero_image, 1024, 512)
         super().save(*args, **kwargs)
