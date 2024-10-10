@@ -17,6 +17,9 @@ class Tech(models.Model):
 class Image(models.Model):
     image = models.ImageField(upload_to="img/projects/")
     alt_text = models.CharField(max_length=100)
+    project = models.ForeignKey(
+        "Project", on_delete=models.CASCADE, related_name="images"
+    )
 
     def save(self, *args, **kwargs):
         image_resize(self.image, 512, 512)
@@ -31,7 +34,6 @@ class Project(models.Model):
     slug = models.SlugField(max_length=100)
     description = models.TextField()
     hero_image = models.ImageField(upload_to="img/projects/", default="img/website.png")
-    images = models.ManyToManyField(Image, related_name="projects", blank=True)
     live_url = models.URLField()
     source_code_url = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)
