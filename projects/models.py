@@ -1,6 +1,6 @@
 from django.db import models
 
-from projects.utils import image_resize
+from projects.utils import image_resize, crop_image_16_9
 
 
 class Tech(models.Model):
@@ -17,12 +17,14 @@ class Tech(models.Model):
 class Image(models.Model):
     image = models.ImageField(upload_to="img/projects/")
     alt_text = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, blank=True)
     project = models.ForeignKey(
         "Project", on_delete=models.CASCADE, related_name="images"
     )
 
     def save(self, *args, **kwargs):
-        image_resize(self.image, 512, 512)
+        if not self.pk:
+            crop_image_16_9(self.image, max_width=512)
         super().save(*args, **kwargs)
 
     def __str__(self):
