@@ -39,7 +39,10 @@
 <section id="other_images">
     <div class="grid grid-cols-1 gap-3 my-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:my-8 xl:grid-cols-4">
         {% for image in project.images.all %}
-        <img src="{{ image.image.url }}" alt="{{ project.title }} image" class="w-full rounded-xl">
+        <figure>
+            <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" class="mb-2 w-full rounded-xl">
+            <figcaption class="text-sm italic text-center">{{ image.title }}</figcaption>
+        </figure>
         {% endfor %}
     </div>
 </section>
