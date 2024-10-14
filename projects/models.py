@@ -1,6 +1,6 @@
 from django.db import models
 
-from projects.utils import image_resize, crop_image_16_9
+from projects.utils import crop_image_16_9, image_resize
 
 
 class Tech(models.Model):
@@ -47,6 +47,6 @@ class Project(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        if self.hero_image:
+        if self.hero_image != Project._meta.get_field("hero_image").get_default():
             image_resize(self.hero_image, 1024, 512)
         super().save(*args, **kwargs)
