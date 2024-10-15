@@ -10,33 +10,25 @@
         <div class="p-4 text-center md:py-8 lg:py-12 hero-content text-neutral-content">
             <div class="max-w-lg">
                 <h1 class="mb-5 text-6xl font-bold tracking-tight">Benvenuti</h1>
-                <p class="mb-5 text-xl font-semibold">Qui potete trovare il mio blog e i miei progetti...</p>
+                <p class="mb-5 text-xl font-medium">Qui potete trovare il mio blog e i miei progetti...</p>
             </div>
         </div>
     </div>
-    <section id="projects" class="my-8 md:my-12 lg:my-16">
-        <h1 class="section-title">Progetti</h1>
-        <div class="grid grid-cols-1 gap-4 mb-8 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
-            <c-card title="School Menu">
-            Ex incidunt quia est laudantium ducimus eos expedita accusamus
-            </c-card>
-            <c-card title="Organize It">
-            Vel rerum voluptatem aut accusantium ducimus ut optio eligendi sed minus maxime
-            </c-card>
-            <c-card title="WEBBOgrafico">
-            Ex incidunt quia est laudantium ducimus eos expedita accusamus
-            </c-card>
-        </div>
+    <section id="projects"
+             class="my-8 md:my-12 lg:my-16"
+             hx-trigger="load"
+             hx-swap="innerHTML"
+             hx-get="{% url 'projects_list' %}">
     </section>
     <section id="blog" class="my-8 md:my-12 lg:my-16">
-        <h1 class="section-title">Blog</h1>
+        <h1 class="section-title">Blog <span class="inline-block py-0.5 px-2.5 text-xs font-medium align-top rounded bg-accent text-accent-content me-2">Coming Soon!</span></h1>
         <div class="grid gap-8 lg:grid-cols-2">
-            <c-blog-excerpt title="Static Websites">
-                Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers.
+            {% comment %} <c-blog-excerpt title="Static Websites">
+            Static websites are now used to bootstrap lots of websites and are becoming the basis for a variety of tools that even influence both web designers and developers.
             </c-blog-excerpt>
             <c-blog-excerpt title="How to deploy a Django project">
-                Vel rerum voluptatem aut accusantium ducimus ut optio eligendi sed minus maxime
-            </c-blog-excerpt>
+            Vel rerum voluptatem aut accusantium ducimus ut optio eligendi sed minus maxime
+            </c-blog-excerpt> {% endcomment %}
         </div>
     </section>
 {% endblock content %}
