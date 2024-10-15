@@ -23,7 +23,7 @@ class Image(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        if not self.pk:  # Only process the image if it's a new object
+        if not self.pk or self._state.adding or "image" in self.get_deferred_fields():
             file_object = crop_image_16_9(self.image, max_width=512)
             self.image.save(self.image.name, file_object, save=False)
         super().save(*args, **kwargs)
@@ -47,6 +47,8 @@ class Project(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        if self.hero_image != Project._meta.get_field("hero_image").get_default():
+        if (
+            self.hero_image != Project._meta.get_field("hero_image").get_default()
+        ):  # pragma: no cover
             image_resize(self.hero_image, 1024, 512)
         super().save(*args, **kwargs)

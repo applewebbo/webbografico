@@ -1,7 +1,8 @@
-from io import BytesIO
+import io
 from pathlib import Path
 
 from django.core.files import File
+from django.core.files.base import ContentFile
 from PIL import Image
 
 image_types = {
@@ -14,27 +15,15 @@ image_types = {
 }
 
 
-def image_resize(image, width, height):
-    # Open the image using Pillow
-    img = Image.open(image)
-    # check if either the width or height is greater than the max
-    if img.width > width or img.height > height:
-        output_size = (width, height)
-        # Create a new resized “thumbnail” version of the image with Pillow
-        img.thumbnail(output_size)
-        # Find the file name of the image
-        img_filename = Path(image.file.name).name
-        # Spilt the filename on “.” to get the file extension only
-        img_suffix = Path(image.file.name).name.split(".")[-1]
-        # Use the file extension to determine the file type from the image_types dictionary
-        img_format = image_types[img_suffix]
-        # Save the resized image into the buffer, noting the correct file type
-        buffer = BytesIO()
-        img.save(buffer, format=img_format)
-        # Wrap the buffer in File object
-        file_object = File(buffer)
-        # Save the new resized file as usual, which will save to S3 using django-storages
-        image.save(img_filename, file_object)
+def image_resize(image, max_width, max_height):
+    with Image.open(image) as img:
+        img.thumbnail((max_width, max_height))
+
+        output = io.BytesIO()
+        img.save(output, format="JPEG", quality=85)
+        output.seek(0)
+
+        return ContentFile(output.getvalue(), name=image.name)
 
 
 def crop_image_16_9(image, max_width=512):
@@ -58,7 +47,7 @@ def crop_image_16_9(image, max_width=512):
     img_suffix = img_filename.split(".")[-1]
     img_format = image_types[img_suffix]
 
-    buffer = BytesIO()
+    buffer = io.BytesIO()
     img.save(buffer, format=img_format)
     file_object = File(buffer)
 
