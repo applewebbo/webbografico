@@ -32,16 +32,16 @@
                     <li>
                         {% url 'index' as url %}
                         <a href="{{ url }}"
-                           class="block p-0 {% if request.path == url %}text-primary{% else %}text-gray-500 hover:text-gray-800{% endif %}"
+                           class="block p-0 {% if request.path == url %}text-primary{% else %}text-base-content hover:text-secondary{% endif %}"
                            {% if request.path == url %}aria-current="page"{% endif %}>Home</a>
                     </li>
                     <li>
-                        <a href="#" class="block p-0 text-gray-500 hover:text-gray-800">About</a>
+                        <a href="#" class="block p-0 text-base-content hover:text-secondary">About</a>
                     </li>
                     <li>
                         {% url 'contact' as url %}
                         <a href="{{ url }}"
-                           class="block p-0 {% if request.path == url %}text-primary{% else %}text-gray-500 hover:text-gray-800{% endif %}"
+                           class="block p-0 {% if request.path == url %}text-primary{% else %}text-base-content hover:text-secondary{% endif %}"
                            {% if request.path == url %}aria-current="page"{% endif %}>Contatti</a>
                     </li>
                 </ul>
