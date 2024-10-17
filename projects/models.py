@@ -36,7 +36,7 @@ class Project(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
     description = models.TextField()
-    hero_image = models.ImageField(upload_to="img/projects/", default="img/website.png")
+    hero_image = models.ImageField(upload_to="img/projects/", default="website.jpg")
     live_url = models.URLField()
     source_code_url = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)

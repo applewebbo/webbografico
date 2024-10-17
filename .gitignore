@@ -203,3 +203,4 @@ package.json
 # Various
 .ruff_cache/
 staticfiles/
+media/img/
