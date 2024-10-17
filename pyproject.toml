@@ -16,7 +16,7 @@ description = "Code for my personal website, hosted at https://webbografico.com"
 name = "webbografico"
 readme = "README.md"
 requires-python = ">=3.12"
-version = "0.1.0"
+version = "0.2.0"
 
 [tool.bandit]
 skips = ["B101", "B311"]
