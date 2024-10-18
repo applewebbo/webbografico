@@ -9,6 +9,7 @@ dependencies = [
   "django-tailwind-cli>=2.16.0",
   "django-tinymce>=4.1.0",
   "django>=5.1.1",
+  "granian[pname]>=1.6.1",
   "heroicons[django]>=2.8.0",
   "pillow>=10.4.0",
   "whitenoise[brotli]>=6.7.0"
