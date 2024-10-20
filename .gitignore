@@ -203,3 +203,5 @@ bun.lockb
 .ruff_cache/
 staticfiles/
 media/img/
+db/db.sqlite3
+db/db.sqlite3-journal
