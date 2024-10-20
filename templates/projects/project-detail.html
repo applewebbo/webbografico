@@ -13,15 +13,15 @@
     <div class="col-span-2 lg:col-span-1 card bg-base-100">
         <div class="card-body">
             <div class="grid grid-cols-2 gap-4 lg:gap-2">
-                <div class="lg:col-span-2">
-                    <h3 class="mb-3 card-title">Technologies</h3>
+                <div class="col-span-2 bg-red-300 sm:col-span-1 lg:col-span-2">
+                    <h3 class="mb-3 text-xl font-semibold tracking-tight md:text-2xl">Technologies</h3>
                     <div class="flex flex-wrap gap-2 mb-4">
                         {% for tech in project.technologies.all %}
                         <div class="rounded badge badge-accent">{{ tech.name }}</div>
                         {% endfor %}
                     </div>
                 </div>
-                <div id="project-links" class="flex flex-col gap-4 my-4 lg:col-span-2">
+                <div id="project-links" class="flex flex-col col-span-2 gap-4 my-4 bg-teal-300 sm:col-span-1 lg:col-span-2">
                     <a href="#" class="btn btn-secondary btn-block">View Code</a>
                     <a href="#" class="btn btn-secondary btn-block">Preview Site</a>
                 </div>
