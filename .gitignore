@@ -203,5 +203,10 @@ bun.lockb
 .ruff_cache/
 staticfiles/
 media/img/
+
+# DB files (SQLite)
 db/db.sqlite3
 db/db.sqlite3-journal
+db/db.sqlite3-shm
+db/db.sqlite3-wal
+db/backup_files/
