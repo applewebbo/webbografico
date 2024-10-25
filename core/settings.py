@@ -21,6 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     ACCOUNT_DEFAULT_HTTP_PROTOCOL=(str, "https"),
     ALLOWED_HOSTS=(list, []),
+    CSRF_TRUSTED_ORIGINS=(str, []),
     DEBUG=(bool, False),
     EMAIL_HOST=(str, None),
     EMAIL_PORT=(str, "587"),
@@ -28,6 +29,7 @@ env = environ.Env(
     EMAIL_HOST_PASSWORD=(str, None),
     EMAIL_USE_TLS=(bool, False),
     EMAIL_USE_SSL=(bool, True),
+    PRODUCTION=(bool, False),
 )
 
 # # Take environment variables from .env file
@@ -198,3 +200,6 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+if env("PRODUCTION"):
+    CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS").split(",")
