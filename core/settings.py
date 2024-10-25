@@ -29,7 +29,7 @@ env = environ.Env(
     EMAIL_HOST_PASSWORD=(str, None),
     EMAIL_USE_TLS=(bool, False),
     EMAIL_USE_SSL=(bool, True),
-    PRODUCTION=(bool, False),
+    PRODUCTION=(bool, True),
 )
 
 # # Take environment variables from .env file
@@ -201,5 +201,5 @@ STORAGES = {
     },
 }
 
-if env("PRODUCTION"):
+if env("PRODUCTION"):  # pragma: no cover
     CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS").split(",")
