@@ -1,7 +1,7 @@
 {% load heroicons static %}
 <div x-data="{ open: false }">
     <nav class="border-b shadow-md bg-base-100 border-base-300">
-        <div class="flex flex-wrap justify-between items-center py-6 px-4 mx-auto max-w-screen-lg">
+        <div class="flex flex-wrap justify-between items-center py-2 px-2 mx-auto max-w-screen-lg md:py-4 md:px-4 lg:py-6">
             <a href="{% url 'index' %}" class="flex items-center space-x-3 rtl:space-x-reverse grow">
                 <img src="{% static 'img/logo-panda.png' %}" class="h-8" alt="Logo">
                 <span class="self-center text-base font-semibold tracking-tight whitespace-nowrap md:text-2xl dark:text-white">WEBBOgrafico</span>

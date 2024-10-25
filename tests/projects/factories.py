@@ -1,5 +1,4 @@
 import factory
-from django.core.files.base import ContentFile
 
 from projects.models import Image, Project, Tech
 
@@ -26,9 +25,4 @@ class ImageFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Image
 
-    image = factory.LazyAttribute(
-        lambda _: ContentFile(
-            factory.django.ImageField()._make_data({"width": 1024, "height": 768}),
-            "example.jpg",
-        )
-    )
+    project = factory.SubFactory(ProjectFactory)

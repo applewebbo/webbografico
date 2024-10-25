@@ -21,6 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     ACCOUNT_DEFAULT_HTTP_PROTOCOL=(str, "https"),
     ALLOWED_HOSTS=(list, []),
+    CSRF_TRUSTED_ORIGINS=(str, []),
     DEBUG=(bool, False),
     EMAIL_HOST=(str, None),
     EMAIL_PORT=(str, "587"),
@@ -28,6 +29,7 @@ env = environ.Env(
     EMAIL_HOST_PASSWORD=(str, None),
     EMAIL_USE_TLS=(bool, False),
     EMAIL_USE_SSL=(bool, True),
+    PRODUCTION=(bool, True),
 )
 
 # # Take environment variables from .env file
@@ -43,6 +45,7 @@ ALLOWED_HOSTS: list[str] = env("ALLOWED_HOSTS")
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -65,9 +68,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -106,7 +110,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / "db/db.sqlite3",
         "OPTIONS": {
             "init_command": (
                 "PRAGMA foreign_keys=ON;"
@@ -186,3 +190,16 @@ ANYMAIL = {
     "MAILGUN_API_URL": env("MAILGUN_API_URL"),
     "MAILGUN_SENDER_DOMAIN": env("MAILGUN_SENDER_DOMAIN"),
 }
+
+# WHITENOISE
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+if env("PRODUCTION"):  # pragma: no cover
+    CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS").split(",")
