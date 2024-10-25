@@ -1,9 +1,7 @@
-from django.db import models
-
 from cloudinary.models import CloudinaryField
-from django.core.files.uploadedfile import UploadedFile
 from django.core.exceptions import ValidationError
-
+from django.core.files.uploadedfile import UploadedFile
+from django.db import models
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 2  # 2mb
 
@@ -29,7 +27,13 @@ class Tech(models.Model):
 
 
 class Image(models.Model):
-    image = CloudinaryField("image", validators=[file_validation])
+    image = CloudinaryField(
+        "image",
+        use_filename=True,
+        unique_filename=False,
+        folder="webbografico/other_images",
+        validators=[file_validation],
+    )
     alt_text = models.CharField(max_length=100)
     title = models.CharField(max_length=100, blank=True)
     project = models.ForeignKey(
@@ -51,7 +55,13 @@ class Project(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
     description = models.TextField()
-    hero_image = models.ImageField(upload_to="img/projects/", default="website.jpg")
+    hero_image = CloudinaryField(
+        "image",
+        use_filename=True,
+        unique_filename=False,
+        folder="webbografico/hero_images",
+        validators=[file_validation],
+    )
     live_url = models.URLField()
     source_code_url = models.URLField()
     created_at = models.DateTimeField(auto_now_add=True)
