@@ -13,6 +13,7 @@ jobs:
       DJANGO_SETTINGS_MODULE: core.settings.test
       ADMIN_EMAIL: admin@example.com
       ALLOWED_HOSTS: '*'
+      CSRF_TRUSTED_ORIGINS: https://webbografico.com
       DEBUG: on
       MAILGUN_API_KEY: key-123
       MAILGUN_API_URL: http://localhost:8000
