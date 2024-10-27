@@ -52,9 +52,16 @@ class Image(models.Model):
 
 
 class Project(models.Model):
-    title = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100)
-    description = models.TextField()
+    title = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=50)
+    short_desc = models.CharField(
+        max_length=100,
+        blank=True,
+        help_text="This text will go in the project_list cards",
+    )
+    description = models.TextField(
+        blank=True, help_text="This text will go in the project_detail page"
+    )
     hero_image = CloudinaryField(
         "image",
         use_filename=True,
