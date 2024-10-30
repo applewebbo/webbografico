@@ -30,6 +30,8 @@ env = environ.Env(
     EMAIL_USE_TLS=(bool, False),
     EMAIL_USE_SSL=(bool, True),
     PRODUCTION=(bool, True),
+    RECAPTCHA_PUBLIC_KEY=(str, None),
+    RECAPTCHA_PRIVATE_KEY=(str, None),
 )
 
 # # Take environment variables from .env file
@@ -58,6 +60,7 @@ INSTALLED_APPS = [
     "crispy_tailwind",
     "django_browser_reload",
     "django_cotton",
+    "django_recaptcha",
     "django_tailwind_cli",
     "heroicons",
     "tinymce",
@@ -203,3 +206,7 @@ STORAGES = {
 
 if env("PRODUCTION"):  # pragma: no cover
     CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS").split(",")
+
+# DJANGO-RECAPTCHA
+RECAPTCHA_PUBLIC_KEY = env("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = env("RECAPTCHA_PRIVATE_KEY")

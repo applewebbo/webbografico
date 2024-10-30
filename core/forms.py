@@ -1,5 +1,7 @@
 from crispy_forms.helper import FormHelper
 from django import forms
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV3
 
 
 class DaisyUiTextArea(forms.Textarea):
@@ -37,6 +39,10 @@ class ContactForm(forms.Form):
             "max_length": "Messaggio troppo lungo (max 1000 caratteri)",
         },
         widget=DaisyUiTextArea(attrs={"class": "textarea textarea-bordered w-full"}),
+    )
+    captcha = ReCaptchaField(
+        label=False,
+        widget=ReCaptchaV3(),
     )
 
     def __init__(self, *args, **kwargs):
