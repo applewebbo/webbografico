@@ -7,6 +7,7 @@ dependencies = [
   "django-cotton>=1.0.12",
   "django-crispy-forms>=2.3",
   "django-environ>=0.11.2",
+  "django-recaptcha>=4.0.0",
   "django-tailwind-cli>=2.16.0",
   "django-tinymce>=4.1.0",
   "django>=5.1.1",

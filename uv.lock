@@ -289,6 +289,18 @@ wheels = [
 ]
 
 [[package]]
+name = "django-recaptcha"
+version = "4.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d4/6b/6edf89da076b2d1ea042e14f116de80be18d25b17af158038d5fc14c00bb/django-recaptcha-4.0.0.tar.gz", hash = "sha256:5316438f97700c431d65351470d1255047e3f2cd9af0f2f13592b637dad9213e", size = 22907 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/28/d7/09cefb2b4a7dc9ed8a6aabb176ea86eb904a8f73671358436e4b0aa81b93/django_recaptcha-4.0.0-py3-none-any.whl", hash = "sha256:0d912d5c7c009df4e47accd25029133d47a74342dbd2a8edc2877b6bffa971a3", size = 21915 },
+]
+
+[[package]]
 name = "django-tailwind-cli"
 version = "2.18.1"
 source = { registry = "https://pypi.org/simple" }
@@ -925,6 +937,7 @@ dependencies = [
     { name = "django-cotton" },
     { name = "django-crispy-forms" },
     { name = "django-environ" },
+    { name = "django-recaptcha" },
     { name = "django-tailwind-cli" },
     { name = "django-tinymce" },
     { name = "granian", extra = ["pname"] },
@@ -933,7 +946,7 @@ dependencies = [
     { name = "whitenoise", extra = ["brotli"] },
 ]
 
-[package.dev-dependencies]
+[package.dependency-groups]
 dev = [
     { name = "coverage" },
     { name = "django-coverage-plugin" },
@@ -959,6 +972,7 @@ requires-dist = [
     { name = "django-cotton", specifier = ">=1.0.12" },
     { name = "django-crispy-forms", specifier = ">=2.3" },
     { name = "django-environ", specifier = ">=0.11.2" },
+    { name = "django-recaptcha", specifier = ">=4.0.0" },
     { name = "django-tailwind-cli", specifier = ">=2.16.0" },
     { name = "django-tinymce", specifier = ">=4.1.0" },
     { name = "granian", extras = ["pname"], specifier = ">=1.6.1" },
@@ -967,7 +981,7 @@ requires-dist = [
     { name = "whitenoise", extras = ["brotli"], specifier = ">=6.7.0" },
 ]
 
-[package.metadata.requires-dev]
+[package.metadata.dependency-groups]
 dev = [
     { name = "coverage", extras = ["toml"], specifier = ">=7.6.1" },
     { name = "django-coverage-plugin", specifier = ">=3.1.0" },

@@ -3,7 +3,7 @@
 <div class="grid grid-cols-1 gap-4 mb-8 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
     {% for project in projects %}
         <c-card title="{{ project.title }}" id="{{ project.slug }}" image="{{ project.hero_image.url }}">
-        {{ project.description|truncatewords_html:10|safe }}
+        {{ project.short_desc }}
         </c-card>
     {% endfor %}
 </div>
