@@ -1,6 +1,9 @@
+from unittest.mock import patch
+
 from django.contrib.messages import get_messages
 from django.core import mail
 from django.urls import reverse
+from django_recaptcha.client import RecaptchaResponse
 
 from core.test import TestCase
 
@@ -26,21 +29,36 @@ class ContactViewTest(TestCase):
         self.response_200(response)
         self.assertTemplateUsed(response, "core/contact.html")
 
-    def test_post_valid_form(self):
+    @patch("django_recaptcha.client.submit")
+    def test_post_valid_form(self, mocked_submit):
+        mocked_submit.return_value = RecaptchaResponse(
+            is_valid=True, extra_data={"score": "1"}
+        )
+        self.valid_data["captcha"] = "PASSED"
         response = self.post("contact", data=self.valid_data)
         self.assertRedirects(response, reverse("index"))
         message = list(get_messages(response.wsgi_request))[0].message
         assert message == "Messaggio inviato con successo"
 
-    def test_post_invalid_form(self):
+    @patch("django_recaptcha.client.submit")
+    def test_post_invalid_form(self, mocked_submit):
+        mocked_submit.return_value = RecaptchaResponse(
+            is_valid=True, extra_data={"score": "1"}
+        )
         invalid_data = self.valid_data.copy()
+        invalid_data["captcha"] = "PASSED"
         invalid_data["email"] = "invalid_email"
         response = self.post("contact", data=invalid_data)
         self.response_200(response)
         self.assertTemplateUsed(response, "core/contact.html")
         self.assertIn("Enter a valid email address", response.content.decode())
 
-    def test_send_mail_called(self):
+    @patch("django_recaptcha.client.submit")
+    def test_send_mail_called(self, mocked_submit):
+        mocked_submit.return_value = RecaptchaResponse(
+            is_valid=True, extra_data={"score": "1"}
+        )
+        self.valid_data["captcha"] = "PASSED"
         self.post("contact", data=self.valid_data)
         self.assertEqual(len(mail.outbox), 1)
         sent_mail = mail.outbox[0]
