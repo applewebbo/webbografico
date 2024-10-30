@@ -30,8 +30,8 @@ env = environ.Env(
     EMAIL_USE_TLS=(bool, False),
     EMAIL_USE_SSL=(bool, True),
     PRODUCTION=(bool, True),
-    RECAPTCHA_PUBLIC_KEY=(str, None),
-    RECAPTCHA_PRIVATE_KEY=(str, None),
+    RECAPTCHA_PUBLIC_KEY=(str, []),
+    RECAPTCHA_PRIVATE_KEY=(str, []),
 )
 
 # # Take environment variables from .env file
