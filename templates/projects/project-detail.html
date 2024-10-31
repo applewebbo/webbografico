@@ -36,16 +36,11 @@
         <div class="mb-4 max-w-none prose">{{ project.description|safe }}</div>
     </section>
     <section id="other_images">
-        <div x-data class="grid grid-cols-1 gap-3 my-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:my-8 xl:grid-cols-4">
-        {% for image in project.images.all %}
-        <figure>
-            <a @click="window.innerWidth >= 768 && $dispatch('img-modal', { imgModalSrc: '{{ image.image.url }}', imgModalDesc: '{{ image.title }}' })"
-               class="cursor-pointer">
-                <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" class="mb-2 w-full rounded-xl cursor-default md:cursor-zoom-in" @click="$dispatch('lightbox', '{{ image.image.url }}')">
-            </a>
-            <figcaption class="text-sm italic text-center">{{ image.title }}</figcaption>
-        </figure>
-        {% endfor %}
+        <div x-data
+             class="grid grid-cols-1 gap-3 my-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:my-8 xl:grid-cols-4">
+            {% for image in project.images.all %}
+                <c-other-image image="{{ image.image.url }}" alt="{{ image.alt_text }}" title="{{ image.title }}"></c-other-image>
+            {% endfor %}
         </div>
     </section>
 {% endblock content %}
