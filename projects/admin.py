@@ -18,4 +18,5 @@ class TechAdmin(admin.ModelAdmin):
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("title", "project")
+    list_filter = ("project",)

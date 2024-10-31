@@ -1,0 +1,7 @@
+<figure>
+    <a @click="window.innerWidth >= 768 && $dispatch('img-modal', { imgModalSrc: '{{ image }}', imgModalDesc: '{{ title }}' })"
+       class="cursor-pointer">
+        <img src="{{ image }}" alt="{{ alt }}" class="mb-2 w-full rounded-xl cursor-default md:cursor-zoom-in">
+    </a>
+    <figcaption class="text-sm italic text-center">{{ title }}</figcaption>
+</figure>
