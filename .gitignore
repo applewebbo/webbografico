@@ -210,3 +210,9 @@ db/db.sqlite3-journal
 db/db.sqlite3-shm
 db/db.sqlite3-wal
 db/backup_files/
+
+# Claude Code
+.claude/settings.local.json
+
+# Beans
+.beans/
