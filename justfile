@@ -123,7 +123,7 @@ issue-label number *labels:
 # Create new issue
 [group: 'codeberg']
 issue-create title body="":
-    ./bin/codeberg create "{{title}}" "{{body}}"
+    ./bin/codeberg create "{{title}}" {{ quote(body) }}
 
 # ============================================================================
 # Codeberg Releases
