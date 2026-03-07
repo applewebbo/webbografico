@@ -5,7 +5,7 @@ status: in-progress
 type: epic
 priority: normal
 created_at: 2026-03-06T15:28:34Z
-updated_at: 2026-03-07T14:33:02Z
+updated_at: 2026-03-07T14:44:05Z
 ---
 
 Full migration from Django 5.1 to Hugo static site generator. Remove contact form, keep Tailwind CSS + DaisyUI + AlpineJS, deploy via Caprover with Nginx. Content managed via markdown files edited in Obsidian on macOS.
@@ -176,11 +176,11 @@ git add static/css/tailwind.css
 ```
 
 ### Fase 7b — Pulizia pre-commit hooks Django
-- [ ] Rimuovere hook Python/Django: pyupgrade, django-upgrade, djade, ruff, bandit
-- [ ] Valutare rustywind (Tailwind class sorting — ancora utile per template Hugo)
-- [ ] Mantenere hook generici: trim whitespace, fix end of files, check yaml, large files, toml/yaml formatting
-- [ ] Aggiornare comandi lint nel justfile
-- [ ] Fare insieme alla Fase 7
+- [x] Rimuovere hook Python/Django: pyupgrade, django-upgrade, djade, ruff, bandit
+- [x] Valutare rustywind (Tailwind class sorting — ancora utile per template Hugo)
+- [x] Mantenere hook generici: trim whitespace, fix end of files, check yaml, large files, toml/yaml formatting
+- [x] Aggiornare comandi lint nel justfile
+- [x] Fare insieme alla Fase 7
 
 ## Summary Phase 1
 - Hugo v0.157.0 initialized in repo (hugo new site . --force)
@@ -237,3 +237,9 @@ git add static/css/tailwind.css
 - .gitignore rewritten: removed Python/Django boilerplate, kept macOS/Hugo/Tailwind/env entries
 - README.md rewritten: Hugo stack, development commands, content workflow
 - CLAUDE.md rewritten: Hugo stack, new just commands, updated architecture
+
+## Summary Phase 7b
+- Removed hooks: pyupgrade, django-upgrade, djade, ruff, ruff-format, bandit
+- Kept: trailing-whitespace, end-of-file-fixer, check-yaml, check-added-large-files, rustywind, pretty-format-toml/yaml
+- justfile lint: removed uv run ruff lines, now runs pre-commit directly
+- _pre-commit: switched from uvx prek to pre-commit (installed globally, no Python project needed)

@@ -31,8 +31,6 @@ docker-build:
 
 [group: 'quality']
 lint:
-    uv run ruff check --fix --unsafe-fixes .
-    uv run ruff format .
     just _pre-commit run --all-files
     @echo "\n✓ Lint completato"
     @echo "⚠️  Se ci sono file modificati, devono essere ri-staged:"
@@ -52,7 +50,7 @@ lint-stage:
     @git status --short
 
 _pre-commit *args:
-    uvx prek {{ args }}
+    pre-commit {{ args }}
 
 # ============================================================================
 # Beans
