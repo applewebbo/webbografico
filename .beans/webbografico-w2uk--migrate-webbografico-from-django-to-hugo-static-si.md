@@ -5,7 +5,7 @@ status: in-progress
 type: epic
 priority: normal
 created_at: 2026-03-06T15:28:34Z
-updated_at: 2026-03-07T06:59:59Z
+updated_at: 2026-03-07T07:21:46Z
 ---
 
 Full migration from Django 5.1 to Hugo static site generator. Remove contact form, keep Tailwind CSS + DaisyUI + AlpineJS, deploy via Caprover with Nginx. Content managed via markdown files edited in Obsidian on macOS.
@@ -69,10 +69,10 @@ Convertire template Django → layout Hugo:
   ```
 
 ### Fase 4 — Migrazione Contenuti da Django
-- [ ] Script Python one-shot: esporta progetti da SQLite → file `.md` con frontmatter
-- [ ] Script Python one-shot: scarica immagini da Cloudinary → `content/projects/<slug>/`
-- [ ] Copiare `static/img/logo-panda.png` e `hero_image.jpg`
-- [ ] Copiare `static/js/alpine*.min.js`
+- [x] Script Python one-shot: esporta progetti da SQLite → file `.md` con frontmatter
+- [x] Script Python one-shot: scarica immagini da Cloudinary → `content/projects/<slug>/`
+- [x] Copiare `static/img/logo-panda.png` e `hero_image.jpg` (già presenti)
+- [x] Copiare `static/js/alpine*.min.js` (già presenti)
 
 ### Fase 5 — Deployment Caprover
 - [ ] Nuovo `Dockerfile` multi-stage senza bun/Node:
@@ -208,3 +208,10 @@ git add static/css/tailwind.css
 - archetypes/projects.md: frontmatter with title, date, weight, short_desc, live_url, source_code_url, hero_image, technologies, gallery
 - archetypes/blog.md: frontmatter with title, date, draft, tags, description
 - Hugo builds cleanly (4 pages)
+
+## Summary Phase 4
+- Migrated 3 projects from production SQLite DB (db/db_prod.sqlite3)
+- Downloaded all images from Cloudinary to content/projects/<slug>/
+- Projects: webbografico (5 gallery imgs), menu-scolastico-old (3), menu (4)
+- Static assets (logo, hero, alpine JS) already in place
+- Hugo builds cleanly: 8 pages, 15 non-page files in 51ms
