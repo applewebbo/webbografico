@@ -5,7 +5,7 @@ status: in-progress
 type: epic
 priority: normal
 created_at: 2026-03-06T15:28:34Z
-updated_at: 2026-03-07T14:44:05Z
+updated_at: 2026-03-07T14:45:52Z
 ---
 
 Full migration from Django 5.1 to Hugo static site generator. Remove contact form, keep Tailwind CSS + DaisyUI + AlpineJS, deploy via Caprover with Nginx. Content managed via markdown files edited in Obsidian on macOS.
@@ -109,11 +109,11 @@ Convertire template Django → layout Hugo:
 - [x] Aggiornare `README.md` e `CLAUDE.md`
 
 ### Fase 8 — Workflow Obsidian (documentazione)
-- [ ] Documentare: aprire `content/` come vault Obsidian
-- [ ] Documentare: aggiungere nuovo progetto (crea cartella, `index.md` con frontmatter, drag-drop immagini)
-- [ ] Documentare: aggiungere post blog
-- [ ] Documentare: quando ricompilare il CSS (solo se si modificano template `.html`)
-- [ ] Raccomandare ImageOptim per ottimizzare immagini prima del commit
+- [x] Documentare: aprire `content/` come vault Obsidian
+- [x] Documentare: aggiungere nuovo progetto (crea cartella, `index.md` con frontmatter, drag-drop immagini)
+- [x] Documentare: aggiungere post blog
+- [x] Documentare: quando ricompilare il CSS (solo se si modificano template `.html`)
+- [x] Raccomandare ImageOptim per ottimizzare immagini prima del commit
 
 ## Struttura repo post-migrazione
 
@@ -243,3 +243,7 @@ git add static/css/tailwind.css
 - Kept: trailing-whitespace, end-of-file-fixer, check-yaml, check-added-large-files, rustywind, pretty-format-toml/yaml
 - justfile lint: removed uv run ruff lines, now runs pre-commit directly
 - _pre-commit: switched from uvx prek to pre-commit (installed globally, no Python project needed)
+
+## Summary Phase 8
+- Added 'Content Editing (Obsidian)' section to README.md
+- Documents: open content/ as vault, add project (frontmatter template + ImageOptim tip), add blog post, preview locally, when to recompile CSS, how to publish
