@@ -217,6 +217,3 @@ db/backup_files/
 
 # Claude Code
 .claude/settings.local.json
-
-# Beans
-.beans/
