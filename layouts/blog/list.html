@@ -1,0 +1,16 @@
+{{ define "title" }}Blog - {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<h1 class="section-title">Blog</h1>
+{{ if .Pages }}
+<div class="grid gap-8 lg:grid-cols-2">
+  {{ range .Pages }}
+    {{ partial "blog-excerpt.html" . }}
+  {{ end }}
+</div>
+{{ else }}
+<div class="mb-8">
+  <p class="italic font-medium text-center font-2xl">Nessun articolo pubblicato al momento</p>
+</div>
+{{ end }}
+{{ end }}

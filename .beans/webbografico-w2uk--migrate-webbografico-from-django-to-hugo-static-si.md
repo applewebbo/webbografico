@@ -5,7 +5,7 @@ status: in-progress
 type: epic
 priority: normal
 created_at: 2026-03-06T15:28:34Z
-updated_at: 2026-03-07T06:44:03Z
+updated_at: 2026-03-07T06:56:16Z
 ---
 
 Full migration from Django 5.1 to Hugo static site generator. Remove contact form, keep Tailwind CSS + DaisyUI + AlpineJS, deploy via Caprover with Nginx. Content managed via markdown files edited in Obsidian on macOS.
@@ -34,16 +34,16 @@ Full migration from Django 5.1 to Hugo static site generator. Remove contact for
 
 ### Fase 2 — Layout / Templates
 Convertire template Django → layout Hugo:
-- [ ] `layouts/_default/baseof.html` ← `base.html` (AlpineJS dark mode, CSS locale, fonts Bunny)
-- [ ] `layouts/index.html` ← `core/index.html` (hero + lista progetti + sezione blog)
-- [ ] `layouts/projects/list.html` ← `projects/projects-list.html` (grid card)
-- [ ] `layouts/projects/single.html` ← `project-detail.html` (gallery modal AlpineJS)
-- [ ] `layouts/blog/list.html` ← `article-list.html` (mostra "coming soon" se nessun post)
-- [ ] `layouts/blog/single.html` ← template articolo singolo (pronto per il futuro)
-- [ ] `layouts/partials/navbar.html` ← `navbar.html` (rimuovere link Contatti)
-- [ ] `layouts/partials/footer.html` ← `footer.html`
-- [ ] `layouts/partials/gallery-modal.html` ← `gallery-modal.html` (AlpineJS invariato)
-- [ ] `layouts/shortcodes/tech-badge.html` per i badge tecnologie
+- [x] `layouts/_default/baseof.html` ← `base.html` (AlpineJS dark mode, CSS locale, fonts Bunny)
+- [x] `layouts/index.html` ← `core/index.html` (hero + lista progetti + sezione blog)
+- [x] `layouts/projects/list.html` ← `projects/projects-list.html` (grid card)
+- [x] `layouts/projects/single.html` ← `project-detail.html` (gallery modal AlpineJS)
+- [x] `layouts/blog/list.html` ← `article-list.html` (mostra "coming soon" se nessun post)
+- [x] `layouts/blog/single.html` ← template articolo singolo (pronto per il futuro)
+- [x] `layouts/partials/navbar.html` ← `navbar.html` (rimuovere link Contatti)
+- [x] `layouts/partials/footer.html` ← `footer.html`
+- [x] `layouts/partials/gallery-modal.html` ← `gallery-modal.html` (AlpineJS invariato)
+- [x] `layouts/shortcodes/tech-badge.html` per i badge tecnologie
 
 ### Fase 3 — Struttura Contenuti
 - [ ] Creare `content/projects/` con Page Bundles (ogni progetto = cartella con `index.md` + immagini)
@@ -192,3 +192,12 @@ git add static/css/tailwind.css
 - .gitignore updated: bin/tailwindcss-* ignored, public/ ignored, static/css/tailwind.css tracked
 - just css, just serve, just build, just docker-build added to justfile
 - CSS compiled and committed (static/css/tailwind.css)
+
+## Summary Phase 2
+- Converted all Django/Cotton templates to Hugo layouts
+- Heroicons replaced with inline SVGs
+- HTMX removed: projects rendered statically via Hugo range
+- Cotton components converted to Hugo partials (project-card, blog-excerpt)
+- gallery-modal.html: AlpineJS unchanged
+- Added _default/terms.html for tags taxonomy
+- Hugo builds cleanly in ~18ms with zero warnings

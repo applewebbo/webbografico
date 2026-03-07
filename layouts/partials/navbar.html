@@ -1,0 +1,56 @@
+<div x-data="{ open: false }">
+  <nav class="border-b shadow-md bg-base-100 border-base-300">
+    <div class="flex flex-wrap justify-between items-center py-2 px-2 mx-auto max-w-screen-lg md:py-4 md:px-4 lg:py-6">
+      <a href="{{ "/" | relURL }}" class="flex items-center space-x-3 rtl:space-x-reverse grow">
+        <img src="{{ "img/logo-panda.png" | relURL }}" class="h-8" alt="Logo">
+        <span class="self-center text-base font-semibold tracking-tight whitespace-nowrap md:text-2xl dark:text-white">WEBBOgrafico</span>
+      </a>
+      <!-- theme controller -->
+      <div id="theme-controller" x-cloak class="inline-flex gap-2 items-center md:order-3">
+        <button class="mr-2" x-on:click="darkMode = false" x-show="darkMode">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"/></svg>
+        </button>
+        <button class="mr-2" x-on:click="darkMode = true" x-show="!darkMode">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/></svg>
+        </button>
+      </div>
+      <div class="flex items-end space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
+        <button type="button"
+                class="inline-flex justify-center items-center p-2 w-10 h-10 text-sm text-gray-500 rounded-lg md:hidden dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                x-on:click="open = ! open">
+          <span class="sr-only">Open main menu</span>
+          <svg x-show="! open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd"/></svg>
+          <svg x-show="open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
+      <div class="hidden justify-between items-center w-full md:flex md:order-1 md:w-auto md:me-8">
+        <ul class="flex flex-col p-4 mt-4 font-medium rounded-lg border border-gray-100 md:flex-row md:p-0 md:mt-0 md:space-x-8 md:border-0 rtl:space-x-reverse">
+          <li>
+            <a href="{{ "/" | relURL }}"
+               class="block p-0 {{ if .IsHome }}text-primary{{ else }}text-base-content hover:text-secondary{{ end }}"
+               {{ if .IsHome }}aria-current="page"{{ end }}>Home</a>
+          </li>
+          <li>
+            <a href="#" class="block p-0 text-base-content hover:text-secondary">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div class="justify-between items-center w-full md:hidden"
+         x-cloak
+         x-show="open"
+         x-collapse.duration.500>
+      <ul class="flex flex-col gap-x-0 gap-y-3 p-4 px-5">
+        <li>
+          <a href="{{ "/" | relURL }}"
+             class="block py-2 px-3 rounded md:p-0 {{ if .IsHome }}current{{ else }}text-base-content hover:bg-base-200{{ end }}"
+             {{ if .IsHome }}aria-current="page"{{ end }}>Home</a>
+        </li>
+        <li>
+          <a href="#" class="block py-2 px-3 rounded text-base-content hover:bg-base-200">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

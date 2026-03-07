@@ -1,0 +1,21 @@
+{{ define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<article class="mx-auto max-w-3xl">
+  <header class="mb-8">
+    <div class="flex gap-2 items-center mb-4">
+      {{ range .Params.tags }}
+      <span class="inline-flex items-center py-0.5 px-2.5 text-xs font-medium rounded bg-accent text-accent-content">{{ . | title }}</span>
+      {{ end }}
+      <span class="text-sm text-gray-400">{{ .Date.Format "02 January 2006" }}</span>
+    </div>
+    <h1 class="mb-4 text-4xl font-bold tracking-tight">{{ .Title }}</h1>
+    {{ with .Description }}
+    <p class="text-xl text-gray-500">{{ . }}</p>
+    {{ end }}
+  </header>
+  <div class="max-w-none prose">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

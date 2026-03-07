@@ -1,0 +1,16 @@
+{{ define "title" }}Progetti - {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<h1 class="section-title">Progetti</h1>
+{{ if .Pages }}
+<div class="grid grid-cols-1 gap-4 mb-8 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
+  {{ range .Pages.ByWeight }}
+    {{ partial "project-card.html" . }}
+  {{ end }}
+</div>
+{{ else }}
+<div class="mb-8">
+  <p class="italic font-medium text-center font-2xl">Nessun progetto presente al momento</p>
+</div>
+{{ end }}
+{{ end }}

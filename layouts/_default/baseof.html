@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="it"
+      x-data="{darkMode: $persist('light')}"
+      x-bind:data-theme="darkMode ? 'dracula' : 'light'">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta name="keywords" content="{{ .Site.Params.keywords }}">
+    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+    <link rel="stylesheet" href="{{ "css/tailwind.css" | relURL }}">
+    <script defer src="{{ "js/alpine-collapse.min.js" | relURL }}"></script>
+    <script defer src="{{ "js/alpine-persist.min.js" | relURL }}"></script>
+    <script defer src="{{ "js/alpine.min.js" | relURL }}"></script>
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=poppins:600" rel="stylesheet">
+  </head>
+  <body class="bg-base-200">
+    {{ partial "navbar.html" . }}
+    <div class="container pt-8 mx-auto lg:pt-12">
+      {{ block "main" . }}{{ end }}
+    </div>
+    {{ partial "footer.html" . }}
+  </body>
+</html>
