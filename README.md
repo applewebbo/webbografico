@@ -101,11 +101,42 @@ git push
 
 ## Deployment
 
-Push to Codeberg → Caprover rebuilds via multi-stage Dockerfile (Hugo build → Nginx serve).
+Multi-stage Dockerfile: Hugo builds the static site → Nginx serves it. No Python, no Node in the final image.
+
+### Deploy via CLI (current)
 
 ```bash
-# CSS must be recompiled and committed before deploy if templates changed
+caprover deploy --host https://captain.<your-domain> --appName webbografico --branch main
+```
+
+Or interactively:
+```bash
+caprover deploy
+```
+
+### Deploy via Webhook (recommended)
+
+Set up once, then every push to `main` on Codeberg triggers an automatic deploy.
+
+**1. Enable webhook in Caprover**
+- Open Caprover dashboard → Apps → `webbografico` → Deployment tab
+- Enable "Trigger Build on Push" → copy the webhook URL
+
+**2. Add webhook in Codeberg**
+- Go to repo Settings → Webhooks → Add Webhook
+- Payload URL: paste the Caprover webhook URL
+- Content type: `application/json`
+- Trigger: "Push events" on branch `main`
+- Save
+
+From that point, `git push origin main` automatically rebuilds and deploys.
+
+### Before any deploy
+
+If HTML templates in `layouts/` changed, recompile CSS first:
+```bash
 just css
 git add static/css/tailwind.css
-# then commit and push
+git commit -m "chore(css): recompile tailwind"
+git push origin main
 ```
