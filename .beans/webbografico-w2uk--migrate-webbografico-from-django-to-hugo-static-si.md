@@ -5,7 +5,7 @@ status: in-progress
 type: epic
 priority: normal
 created_at: 2026-03-06T15:28:34Z
-updated_at: 2026-03-07T06:56:16Z
+updated_at: 2026-03-07T06:59:59Z
 ---
 
 Full migration from Django 5.1 to Hugo static site generator. Remove contact form, keep Tailwind CSS + DaisyUI + AlpineJS, deploy via Caprover with Nginx. Content managed via markdown files edited in Obsidian on macOS.
@@ -46,9 +46,9 @@ Convertire template Django → layout Hugo:
 - [x] `layouts/shortcodes/tech-badge.html` per i badge tecnologie
 
 ### Fase 3 — Struttura Contenuti
-- [ ] Creare `content/projects/` con Page Bundles (ogni progetto = cartella con `index.md` + immagini)
-- [ ] Creare `content/blog/.gitkeep` (sezione pronta, vuota)
-- [ ] Definire frontmatter progetti:
+- [x] Creare `content/projects/` con Page Bundles (ogni progetto = cartella con `index.md` + immagini)
+- [x] Creare `content/blog/.gitkeep` (sezione pronta, vuota)
+- [x] Definire frontmatter progetti:
   ```yaml
   title: "Nome Progetto"
   slug: "nome-progetto"
@@ -59,7 +59,7 @@ Convertire template Django → layout Hugo:
   hero_image: "hero.jpg"
   weight: 1
   ```
-- [ ] Definire frontmatter blog post:
+- [x] Definire frontmatter blog post:
   ```yaml
   title: "Titolo articolo"
   date: 2025-01-01
@@ -201,3 +201,10 @@ git add static/css/tailwind.css
 - gallery-modal.html: AlpineJS unchanged
 - Added _default/terms.html for tags taxonomy
 - Hugo builds cleanly in ~18ms with zero warnings
+
+## Summary Phase 3
+- content/projects/ created with .gitkeep (ready for Page Bundles)
+- content/blog/ created with .gitkeep (empty, ready for future posts)
+- archetypes/projects.md: frontmatter with title, date, weight, short_desc, live_url, source_code_url, hero_image, technologies, gallery
+- archetypes/blog.md: frontmatter with title, date, draft, tags, description
+- Hugo builds cleanly (4 pages)
