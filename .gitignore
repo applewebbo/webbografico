@@ -193,10 +193,14 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Tailwind CSS development
-tailwind.css
+# Tailwind CSS standalone binaries (platform-specific, downloaded locally)
+bin/tailwindcss-*
 node_modules/
 bun.lockb
+
+# Hugo build output
+public/
+resources/_gen/
 
 
 # Various

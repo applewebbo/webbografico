@@ -1,0 +1,33 @@
+baseURL = 'https://webbografico.com/'
+defaultContentLanguage = 'it'
+languageCode = 'it'
+title = 'WEBBOgrafico'
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup.highlight]
+noClasses = false
+
+[[menus.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menus.main]]
+name = "About"
+url = "/about/"
+weight = 2
+
+[outputs]
+home = ["HTML"]
+page = ["HTML"]
+section = ["HTML"]
+
+[params]
+author = "WEBBOgrafico"
+description = "Personal blog and portfolio website"
+keywords = "personal, blog, portfolio, web development"
+
+[taxonomies]
+tag = "tags"

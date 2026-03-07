@@ -3,6 +3,31 @@
 default:
     @just --list
 
+# ============================================================================
+# Hugo
+# ============================================================================
+
+# Start Hugo development server with live reload
+[group: 'hugo']
+serve:
+    hugo server --buildDrafts
+
+# Build production site
+[group: 'hugo']
+build:
+    hugo --minify
+
+# Recompile Tailwind CSS (run only when layouts/*.html templates change)
+[group: 'hugo']
+css:
+    bin/tailwindcss-macos-arm64 -i static/src/input.css -o static/css/tailwind.css --minify
+
+# Build and test Docker image locally
+[group: 'hugo']
+docker-build:
+    docker build -t webbografico:local .
+    @echo "✓ Build complete. Run: docker run -p 8080:80 webbografico:local"
+
 # Bootstrap the project (UV and BUN needed)
 bootstrap:
     uv venv
