@@ -5,7 +5,7 @@ status: in-progress
 type: epic
 priority: normal
 created_at: 2026-03-06T15:28:34Z
-updated_at: 2026-03-07T07:29:32Z
+updated_at: 2026-03-07T14:25:38Z
 ---
 
 Full migration from Django 5.1 to Hugo static site generator. Remove contact form, keep Tailwind CSS + DaisyUI + AlpineJS, deploy via Caprover with Nginx. Content managed via markdown files edited in Obsidian on macOS.
@@ -94,11 +94,11 @@ Convertire template Django → layout Hugo:
 - [x] Testare build Docker in locale
 
 ### Fase 6 — Giustfile aggiornato
-- [ ] `just serve` → `hugo server` (dev locale con live reload)
-- [ ] `just build` → `hugo --minify`
-- [ ] `just css` → `bin/tailwindcss-macos-arm64 -i static/src/input.css -o static/css/tailwind.css --minify`
-- [ ] `just docker-build` → build e test Docker in locale
-- [ ] Rimuovere tutti i comandi Django
+- [x] `just serve` → `hugo server` (dev locale con live reload)
+- [x] `just build` → `hugo --minify`
+- [x] `just css` → `bin/tailwindcss-macos-arm64 -i static/src/input.css -o static/css/tailwind.css --minify`
+- [x] `just docker-build` → build e test Docker in locale
+- [x] Rimuovere tutti i comandi Django
 
 ### Fase 7 — Pulizia Django
 - [ ] Rimuovere `core/`, `projects/`, `tests/`, `conftest.py`
@@ -222,3 +222,10 @@ git add static/css/tailwind.css
 - captain-definition unchanged (points to Dockerfile)
 - Docker build: Hugo v0.154.5, 8 pages in 21ms
 - Container smoke test: / and /projects/webbografico/ return HTTP 200
+
+## Summary Phase 6
+- Removed Django-specific commands: bootstrap, local, secure, requirements, update_all, update, migrate, test, ftest
+- Kept: lint, lint-stage, _pre-commit (used by lint, will be updated in Phase 7b)
+- Added `just issue-body <number>`: prints raw markdown body of a Codeberg issue
+- Added `just issue-check-all <number>`: checks all unchecked items in an issue (via new `check-all` command in bin/codeberg)
+- justfile now only contains: hugo, quality (lint/lint-stage), beans, codeberg commands

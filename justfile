@@ -28,16 +28,6 @@ docker-build:
     docker build -t webbografico:local .
     @echo "✓ Build complete. Run: docker run -p 8080:80 webbografico:local"
 
-# Bootstrap the project (UV and BUN needed)
-bootstrap:
-    uv venv
-    source .venv/bin/activate
-    uv sync
-    bun add -D daisyui@latest
-
-# Run the local development server
-local:
-    python manage.py tailwind runserver
 
 [group: 'quality']
 lint:
@@ -61,36 +51,8 @@ lint-stage:
     @echo "✓ File staged. Pronto per il commit"
     @git status --short
 
-[group: 'quality']
-secure:
-    uv-secure
-
 _pre-commit *args:
     uvx prek {{ args }}
-
-# Install requirements
-requirements:
-    uv sync --all-extras
-
-# Update all packages
-update_all:
-    uv sync --upgrade
-
-# Update a specific package
-update *package:
-    uv sync --upgrade-package {{ package }}
-
-# Run database migrations
-migrate:
-    python manage.py migrate
-
-# Run tests
-test:
-    uv run pytest --reuse-db -s
-
-# Run fast tests
-ftest:
-    uv run pytest -n 8 --reuse-db
 
 # ============================================================================
 # Beans
@@ -120,6 +82,15 @@ issues state="open":
 issue number:
     ./bin/codeberg show {{number}}
 
+# Print raw body of an issue (markdown)
+[group: 'codeberg']
+issue-body number:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    TOKEN=$(grep "^CODEBERG_API_TOKEN=" .env | cut -d'=' -f2 | tr -d '"' | tr -d "'")
+    curl -s "https://codeberg.org/api/v1/repos/webbografico/webbografico/issues/{{number}}" \
+      -H "Authorization: token ${TOKEN}" | jq -r '.body'
+
 # Add comment to issue
 [group: 'codeberg']
 issue-comment number text:
@@ -129,6 +100,11 @@ issue-comment number text:
 [group: 'codeberg']
 issue-check number step:
     ./bin/codeberg check {{number}} "{{step}}"
+
+# Mark all unchecked checkboxes as done in issue body
+[group: 'codeberg']
+issue-check-all number:
+    ./bin/codeberg check-all {{number}}
 
 # Close issue
 [group: 'codeberg']

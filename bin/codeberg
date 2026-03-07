@@ -247,6 +247,35 @@ print(body.replace(old, new, 1))
     echo -e "${GREEN}✓ Step checked: $step_text${NC}"
 }
 
+cmd_check_all() {
+    local issue_num=$1
+
+    detect_repo
+
+    # Fetch current body
+    local current_body
+    current_body=$(api_request GET "/repos/$REPO_OWNER/$REPO_NAME/issues/$issue_num" | \
+        python3 -c "import sys, json; print(json.load(sys.stdin).get('body') or '')")
+
+    local count
+    count=$(CB_BODY="$current_body" python3 -c "import os; print(os.environ['CB_BODY'].count('- [ ]'))")
+
+    if [[ "$count" -eq 0 ]]; then
+        echo -e "${GREEN}No unchecked items in issue #$issue_num${NC}"
+        return 0
+    fi
+
+    local new_body
+    new_body=$(CB_BODY="$current_body" python3 -c "import os; print(os.environ['CB_BODY'].replace('- [ ]', '- [x]'))")
+
+    local data
+    data=$(CB_BODY="$new_body" python3 -c "import json, os; print(json.dumps({'body': os.environ['CB_BODY']}))")
+
+    echo -e "${GREEN}Marking all unchecked items in issue #$issue_num...${NC}"
+    api_request PATCH "/repos/$REPO_OWNER/$REPO_NAME/issues/$issue_num" "$data" >/dev/null
+    echo -e "${GREEN}✓ Checked $count items in issue #$issue_num${NC}"
+}
+
 cmd_create() {
     local title="$1"
     shift
@@ -283,6 +312,7 @@ ${YELLOW}Commands:${NC}
   show <number>             Show issue details and comments
   comment <number> <text>   Add comment to issue
   check <number> <step>     Mark a checkbox step as done in issue body
+  check-all <number>        Mark all unchecked checkboxes as done in issue body
   close <number>            Close issue
   reopen <number>           Reopen issue
   label <number> <labels>   Add labels to issue (space-separated)
@@ -341,6 +371,13 @@ main() {
                 exit 1
             fi
             cmd_check "$@"
+            ;;
+        check-all)
+            if [[ $# -eq 0 ]]; then
+                echo -e "${RED}Error: Issue number required${NC}" >&2
+                exit 1
+            fi
+            cmd_check_all "$@"
             ;;
         close)
             if [[ $# -eq 0 ]]; then
