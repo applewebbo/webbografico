@@ -5,7 +5,7 @@ status: in-progress
 type: epic
 priority: normal
 created_at: 2026-03-06T15:28:34Z
-updated_at: 2026-03-07T07:21:46Z
+updated_at: 2026-03-07T07:29:32Z
 ---
 
 Full migration from Django 5.1 to Hugo static site generator. Remove contact form, keep Tailwind CSS + DaisyUI + AlpineJS, deploy via Caprover with Nginx. Content managed via markdown files edited in Obsidian on macOS.
@@ -75,7 +75,7 @@ Convertire template Django → layout Hugo:
 - [x] Copiare `static/js/alpine*.min.js` (già presenti)
 
 ### Fase 5 — Deployment Caprover
-- [ ] Nuovo `Dockerfile` multi-stage senza bun/Node:
+- [x] Nuovo `Dockerfile` multi-stage senza bun/Node:
   ```dockerfile
   # Stage 1: build Hugo
   FROM hugomods/hugo:latest AS builder
@@ -89,9 +89,9 @@ Convertire template Django → layout Hugo:
   COPY nginx.conf /etc/nginx/conf.d/default.conf
   EXPOSE 80
   ```
-- [ ] Creare `nginx.conf` (gzip, cache headers statici, custom 404)
-- [ ] Aggiornare `captain-definition` (rimane puntato a Dockerfile)
-- [ ] Testare build Docker in locale
+- [x] Creare `nginx.conf` (gzip, cache headers statici, custom 404)
+- [x] Aggiornare `captain-definition` (rimane puntato a Dockerfile)
+- [x] Testare build Docker in locale
 
 ### Fase 6 — Giustfile aggiornato
 - [ ] `just serve` → `hugo server` (dev locale con live reload)
@@ -215,3 +215,10 @@ git add static/css/tailwind.css
 - Projects: webbografico (5 gallery imgs), menu-scolastico-old (3), menu (4)
 - Static assets (logo, hero, alpine JS) already in place
 - Hugo builds cleanly: 8 pages, 15 non-page files in 51ms
+
+## Summary Phase 5
+- Dockerfile: hugomods/hugo:exts AS builder → nginx:alpine, no Python/Node/bun
+- nginx.conf: gzip, 1yr cache on static assets, try_files routing, custom 404
+- captain-definition unchanged (points to Dockerfile)
+- Docker build: Hugo v0.154.5, 8 pages in 21ms
+- Container smoke test: / and /projects/webbografico/ return HTTP 200

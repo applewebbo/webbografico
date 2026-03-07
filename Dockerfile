@@ -1,39 +1,14 @@
-# pull official base image
-FROM python:3.12-slim-bookworm
+# Stage 1: Build static site with Hugo
+FROM hugomods/hugo:exts AS builder
 
-# set work directory
-WORKDIR /app
+WORKDIR /src
+COPY . .
+RUN hugo --minify
 
-# set environment variables
-ENV PIP_DISABLE_PIP_VERSION_CHECK=1
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONPATH=/srv
-ENV PYTHONUNBUFFERED=1
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
 
-# install uv and other dependencies
-RUN apt-get update && apt-get install -y curl unzip
-RUN pip install --upgrade pip uv
-RUN python -m uv venv
+COPY --from=builder /src/public /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Install Bun
-RUN curl -fsSL https://bun.sh/install | bash
-
-# Copy project files
-COPY . /app
-
-# Install DaisyUI using Bun in the project directory
-RUN ~/.bun/bin/bun add -D daisyui@latest
-
-# activate virtual env
-ENV PATH=/app/.venv/bin:$PATH
-
-# install Python dependencies
-COPY pyproject.toml ./
-COPY uv.lock ./
-RUN uv sync --frozen --no-dev --no-install-project
-
-# expose port for granian
 EXPOSE 80
-
-# run entrypoint.sh
-CMD ["sh", "./entrypoint.sh"]
