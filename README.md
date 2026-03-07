@@ -1,30 +1,46 @@
-# Personal Website Project
+# webbografico.com
 
-This repository contains the code for my personal website, which you can visit at [webbografico.com](https://webbografico.com).
+Personal website and portfolio at [webbografico.com](https://webbografico.com).
 
-## About the Project
+## Stack
 
-This website serves as my personal page, showcasing my work and hosting a blog. It's built using the following technologies:
+- [Hugo](https://gohugo.io/) — static site generator
+- [Tailwind CSS v4](https://tailwindcss.com/) + [DaisyUI v5](https://daisyui.com/) — standalone binaries, zero Node/npm
+- [AlpineJS](https://alpinejs.dev/) — dark mode toggle, gallery modal
+- [Nginx](https://nginx.org/) — production server
+- [Caprover](https://caprover.com/) — deployment
 
-- Django: A high-level Python web framework
-- Tailwind CSS: A utility-first CSS framework
+## Development
 
-## Features
+```bash
+just serve        # Hugo dev server with live reload
+just build        # Production build (hugo --minify)
+just css          # Recompile Tailwind CSS (only when layouts change)
+just docker-build # Build and test Docker image locally
+```
 
-- Blog: Regular updates and articles
-- Project Showcase: A collection of my work and projects
+## Content
 
-## Visit the Website
+Content is managed as Hugo Page Bundles in `content/`:
 
-To see the live version of this project, please visit [webbografico.com](https://webbografico.com).
+```
+content/
+  projects/<slug>/
+    index.md      # frontmatter + description
+    hero.jpg      # images live alongside the content
+  blog/
+    .gitkeep      # ready for future posts
+```
 
-## Technologies Used
+Edit content in [Obsidian](https://obsidian.md/) by opening `content/` as a vault.
 
-- Django
-- Tailwind CSS
-- Python
-- HTML
-- CSS
-- JavaScript
+## Deployment
 
-Feel free to explore the code and reach out if you have any questions or feedback!
+Push to Codeberg → Caprover rebuilds via multi-stage Dockerfile (Hugo build → Nginx serve).
+
+```bash
+# CSS must be recompiled and committed before deploy if templates changed
+just css
+git add static/css/tailwind.css
+# then commit and push
+```

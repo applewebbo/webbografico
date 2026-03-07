@@ -5,7 +5,7 @@ status: in-progress
 type: epic
 priority: normal
 created_at: 2026-03-06T15:28:34Z
-updated_at: 2026-03-07T14:25:38Z
+updated_at: 2026-03-07T14:33:02Z
 ---
 
 Full migration from Django 5.1 to Hugo static site generator. Remove contact form, keep Tailwind CSS + DaisyUI + AlpineJS, deploy via Caprover with Nginx. Content managed via markdown files edited in Obsidian on macOS.
@@ -101,12 +101,12 @@ Convertire template Django → layout Hugo:
 - [x] Rimuovere tutti i comandi Django
 
 ### Fase 7 — Pulizia Django
-- [ ] Rimuovere `core/`, `projects/`, `tests/`, `conftest.py`
-- [ ] Rimuovere `manage.py`, `pyproject.toml`, `uv.lock`
-- [ ] Rimuovere `package.json`, `package-lock.json`, `node_modules/`, `bun.lockb`
-- [ ] Rimuovere `entrypoint.sh`, `db/`, `media/`, `staticfiles/`
-- [ ] Aggiornare `.gitignore` (ignorare `public/`, mantenere `static/css/tailwind.css`)
-- [ ] Aggiornare `README.md` e `CLAUDE.md`
+- [x] Rimuovere `core/`, `projects/`, `tests/`, `conftest.py`
+- [x] Rimuovere `manage.py`, `pyproject.toml`, `uv.lock`
+- [x] Rimuovere `package.json`, `package-lock.json`, `node_modules/`, `bun.lockb`
+- [x] Rimuovere `entrypoint.sh`, `db/`, `media/`, `staticfiles/`
+- [x] Aggiornare `.gitignore` (ignorare `public/`, mantenere `static/css/tailwind.css`)
+- [x] Aggiornare `README.md` e `CLAUDE.md`
 
 ### Fase 8 — Workflow Obsidian (documentazione)
 - [ ] Documentare: aprire `content/` come vault Obsidian
@@ -229,3 +229,11 @@ git add static/css/tailwind.css
 - Added `just issue-body <number>`: prints raw markdown body of a Codeberg issue
 - Added `just issue-check-all <number>`: checks all unchecked items in an issue (via new `check-all` command in bin/codeberg)
 - justfile now only contains: hugo, quality (lint/lint-stage), beans, codeberg commands
+
+## Summary Phase 7
+- Removed Django codebase: core/, projects/, tests/, conftest.py
+- Removed: manage.py, pyproject.toml, uv.lock, bun.lockb, entrypoint.sh
+- Removed: db/ (sqlite3 files), media/, staticfiles/, htmlcov/
+- .gitignore rewritten: removed Python/Django boilerplate, kept macOS/Hugo/Tailwind/env entries
+- README.md rewritten: Hugo stack, development commands, content workflow
+- CLAUDE.md rewritten: Hugo stack, new just commands, updated architecture

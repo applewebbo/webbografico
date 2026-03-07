@@ -4,131 +4,96 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal website/portfolio hosted at https://webbografico.com. Built with Django 5.1, HTMX, Tailwind CSS (via django-tailwind-cli with DaisyUI), and Cloudinary for media.
+Personal website/portfolio hosted at https://webbografico.com. Built with Hugo, Tailwind CSS v4 + DaisyUI v5 (standalone binaries), and AlpineJS. Deployed via Caprover with a multi-stage Dockerfile (Hugo build → Nginx serve).
 
 ## Tech Stack
 
-- **Backend**: Django 5.1+ + Python 3.12+
-- **Frontend**: HTMX + Tailwind CSS + DaisyUI
-- **Database**: SQLite with WAL mode enabled
-- **Server**: Granian (WSGI)
-- **Package Management**: uv for Python
+- **Static Site Generator**: Hugo
+- **CSS**: Tailwind CSS v4 + DaisyUI v5 via standalone CLI (`bin/tailwindcss-macos-arm64`)
+- **JS**: AlpineJS (local files in `static/js/`)
+- **Server**: Nginx
 - **Task Runner**: just (see justfile)
 - **Repository**: Codeberg (https://codeberg.org/webbografico/webbografico)
 
 ## Development Commands
 
-### Setup
+### Hugo
 ```bash
-just install  # Install/sync Python dependencies
-```
-
-### Running the App
-```bash
-just local  # Run dev server with Tailwind watch mode
-```
-
-### Database
-```bash
-just migrate   # Run migrations
-just manage makemigrations  # Create migrations
-```
-
-### Testing
-```bash
-just test   # Run pytest
-just ftest  # Fast parallel tests (pytest -n 8 --reuse-db, 100% coverage required)
+just serve        # Hugo dev server with live reload (--buildDrafts)
+just build        # Production build (hugo --minify)
+just css          # Recompile Tailwind CSS (only when layouts/*.html change)
+just docker-build # Build and test Docker image locally
 ```
 
 ### Code Quality
 ```bash
-just lint        # Run ruff check, ruff format, and pre-commit hooks
+just lint        # Run pre-commit hooks
 just lint-stage  # Lint and auto-stage all changes (use before commit)
-just secure      # Run uv-secure for security checks
-```
-
-### Updates
-```bash
-just update_all          # Upgrade all packages
-just update <package>    # Upgrade specific package
-just lock                # Rebuild lock file
-```
-
-### Docker
-```bash
-just docker_up     # Start containers
-just docker_build  # Build and start
-just docker_down   # Stop and remove volumes
 ```
 
 ### Issue Management (Codeberg)
 ```bash
-just issues [state]              # List issues (state: open|closed|all, default: open)
-just issue <number>              # Show issue details
-just issue-create <title> [body] # Create new issue
-just issue-comment <number> <text> # Add comment to issue
-just issue-close <number>        # Close issue
-just issue-reopen <number>       # Reopen issue
-just issue-label <number> <labels> # Add labels (space-separated)
+just issues [state]                  # List issues (open|closed|all)
+just issue <number>                  # Show issue details
+just issue-body <number>             # Print raw markdown body
+just issue-create <title> [body]     # Create new issue
+just issue-comment <number> <text>   # Add comment
+just issue-check <number> <step>     # Check a single task by text
+just issue-check-all <number>        # Check all unchecked tasks
+just issue-close <number>            # Close issue
+just issue-reopen <number>           # Reopen issue
+just issue-label <number> <labels>   # Add labels
 ```
 
 **Note**: The project is hosted on Codeberg. Use the justfile commands above to manage issues.
 
 ## Architecture
 
-### Apps Structure
-- **core/**: Project settings, URLs, WSGI/ASGI config, contact form views
-- **projects/**: Portfolio projects management with images (Cloudinary)
+### Content Structure
+```
+content/
+  projects/<slug>/
+    index.md        # frontmatter + body
+    hero.jpg        # images alongside content (Page Bundle)
+  blog/
+    .gitkeep        # empty, ready for future posts
+```
 
-### Key Components
+### Layouts
+```
+layouts/
+  _default/baseof.html     # base template (AlpineJS dark mode, local CSS, Bunny fonts)
+  index.html               # homepage (hero + projects + blog sections)
+  projects/list.html       # projects grid
+  projects/single.html     # project detail with gallery modal
+  blog/list.html           # blog list (shows coming soon when empty)
+  blog/single.html         # single post template
+  partials/
+    navbar.html
+    footer.html
+    gallery-modal.html     # AlpineJS gallery
+  shortcodes/
+    tech-badge.html
+```
 
-**Projects App** (projects/):
-- `models.py`: `Project`, `ProjectImage` models with Cloudinary media
-- `views.py`: HTMX-powered project list/detail views
-- `admin.py`: Project and image administration
-
-**Core App** (core/):
-- Contact form with reCAPTCHA
-- Custom views and URL routing
-
-### Settings Configuration
-
-Uses django-environ for environment variables. Key settings:
-- **Media**: Cloudinary for image storage
-- Mailgun email backend (django-anymail)
-- SQLite with WAL mode
-- Locale: Italian
-
-### Frontend
-
-- Templates in `templates/` directory
-- HTMX for dynamic interactions
-- Tailwind CSS with DaisyUI components
-- django-browser-reload for live reloading in development
+### CSS Workflow
+Tailwind CSS is compiled once and committed (`static/css/tailwind.css`). Only recompile when HTML templates change:
+```bash
+just css
+git add static/css/tailwind.css
+```
 
 ### Production Deployment
-
-- Dockerfile uses Python 3.12-slim with uv
-- Granian WSGI server
-- WhiteNoise for static files
-- entrypoint.sh: migrate → tailwind build → collectstatic → granian
+- Multi-stage Dockerfile: `hugomods/hugo:exts` builds → `nginx:alpine` serves
+- `nginx.conf`: gzip, 1yr cache on static assets, custom 404
+- `captain-definition` points to Dockerfile
 
 ## Pre-commit Hooks
 
-Configured hooks:
-- pyupgrade (--py312-plus)
-- django-upgrade (Django 5.1)
-- djade (Django template linting)
-- ruff (check + format)
-- bandit (security)
+Configured hooks (`.pre-commit-config.yaml`):
+- trim whitespace, fix end of files, check yaml, large files check
 - rustywind (Tailwind class sorting)
 - YAML/TOML formatting
-
-## Testing Strategy
-
-- Use pytest with `--reuse-db` flag
-- Test files: `tests/` directory
-- Coverage must be 100%
 
 ## Git Commit Guidelines
 
@@ -153,4 +118,4 @@ Configured hooks:
 
 For detailed skill documentation, workflows, and best practices, read and follow the instructions in `SKILLS.md`.
 
-Available skills: `/commit`, `/makemigrations`, `/check-all`, `/review`, `/release`, `/pre-deploy`, `/db-backup`, `/deps-update`, `/cleanup`
+Available skills: `/commit`, `/review`, `/release`
