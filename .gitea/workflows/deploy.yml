@@ -18,6 +18,8 @@ jobs:
         CAPROVER_URL: ${{ secrets.CAPROVER_URL }}
         CAPROVER_PASSWORD: ${{ secrets.CAPROVER_PASSWORD }}
       run: |
+        echo "Using CAPROVER_URL: $CAPROVER_URL"
+        CAPROVER_URL="${CAPROVER_URL%/}"
         LOGIN_RESPONSE=$(curl -s -X POST "$CAPROVER_URL/api/v2/login" \
           -H "Content-Type: application/json" \
           -d "{\"password\":\"$CAPROVER_PASSWORD\"}")
