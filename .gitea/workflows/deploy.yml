@@ -1,0 +1,29 @@
+name: Deploy to Caprover
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Create deploy tarball
+      run: tar -czf /tmp/deploy.tar --exclude='.git' .
+
+    - name: Deploy to Caprover
+      env:
+        CAPROVER_URL: ${{ secrets.CAPROVER_URL }}
+        CAPROVER_PASSWORD: ${{ secrets.CAPROVER_PASSWORD }}
+      run: |
+        TOKEN=$(curl -sf -X POST "$CAPROVER_URL/api/v2/login" \
+          -H "Content-Type: application/json" \
+          -d "{\"password\":\"$CAPROVER_PASSWORD\"}" | jq -r '.data.token')
+
+        curl -sf -X POST "$CAPROVER_URL/api/v2/user/apps/appData/webbografico" \
+          -H "x-captain-auth: $TOKEN" \
+          -F "sourceFile=@/tmp/deploy.tar"
+
+        echo "Deploy triggered successfully"
