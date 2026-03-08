@@ -60,6 +60,20 @@ Open the `content/` folder as an Obsidian vault. No Hugo knowledge required.
 3. Drag images into the same folder (alongside `index.md`)
 4. Optimize images with [ImageOptim](https://imageoptim.com/) before committing
 
+### Edit a static page (About, etc.)
+
+Static pages live directly in `content/` as single `.md` files:
+
+```yaml
+---
+title: "About"
+---
+
+Page content here.
+```
+
+The file `content/about.md` is served at `/about/`.
+
 ### Add a blog post
 
 Create `content/blog/<slug>.md`:

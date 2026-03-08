@@ -31,7 +31,7 @@
                {{ if .IsHome }}aria-current="page"{{ end }}>Home</a>
           </li>
           <li>
-            <a href="#" class="block p-0 text-base-content hover:text-secondary">About</a>
+            <a href="{{ "/about/" | relURL }}" class="block p-0 {{ if eq .RelPermalink "/about/" }}text-primary{{ else }}text-base-content hover:text-secondary{{ end }}">About</a>
           </li>
         </ul>
       </div>
@@ -48,7 +48,7 @@
              {{ if .IsHome }}aria-current="page"{{ end }}>Home</a>
         </li>
         <li>
-          <a href="#" class="block py-2 px-3 rounded text-base-content hover:bg-base-200">About</a>
+          <a href="{{ "/about/" | relURL }}" class="block py-2 px-3 rounded {{ if eq .RelPermalink "/about/" }}current{{ else }}text-base-content hover:bg-base-200{{ end }}">About</a>
         </li>
       </ul>
     </div>

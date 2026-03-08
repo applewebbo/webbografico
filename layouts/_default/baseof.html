@@ -15,9 +15,9 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=poppins:600" rel="stylesheet">
   </head>
-  <body class="bg-base-200">
+  <body class="flex flex-col min-h-screen bg-base-200">
     {{ partial "navbar.html" . }}
-    <div class="container pt-8 mx-auto lg:pt-12">
+    <div class="container flex-1 pt-8 mx-auto lg:pt-12">
       {{ block "main" . }}{{ end }}
     </div>
     {{ partial "footer.html" . }}
