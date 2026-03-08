@@ -20,7 +20,7 @@ jobs:
       run: |
         TOKEN=$(curl -sf -X POST "$CAPROVER_URL/api/v2/login" \
           -H "Content-Type: application/json" \
-          -d "{\"password\":\"$CAPROVER_PASSWORD\"}" | jq -r '.data.token')
+          -d "{\"password\":\"$CAPROVER_PASSWORD\"}" | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['token'])")
 
         curl -sf -X POST "$CAPROVER_URL/api/v2/user/apps/appData/webbografico" \
           -H "x-captain-auth: $TOKEN" \
