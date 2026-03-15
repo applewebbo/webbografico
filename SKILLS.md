@@ -109,24 +109,16 @@ Custom skills available for common Django workflows. Use these for automated qua
 
 **Critical:** Ensures linear history on main with fast-forward only merges
 
-### `/deploy` - Deploy to Production (Caprover)
+### `/deploy` - Deploy to Production (Coolify)
 **Use when:** Ready to deploy to production after a release or hotfix
 
 **What it does:**
 1. Validates branch (warns if not on `main`), clean working tree and remote sync
-2. Runs quick health check (tests, lint, Django check, migrations)
-3. Asks which deploy mode to use:
-   - `--default`: deploy current branch directly (fast, no prompts)
-   - interactive: choose app/branch from Caprover CLI
-4. Shows confirmation summary before deploying
-5. Runs `caprover deploy` streaming output in real time
-6. Verifies the app is up with an HTTP health check
-7. Displays deploy summary
+2. Shows confirmation summary before deploying
+3. Triggers deployment via Coolify webhook (HTTP GET)
+4. Verifies the app is up with an HTTP health check
 
-**App:** `webbografico` on Caprover
-**entrypoint.sh:** `migrate → tailwind build → collectstatic → granian`
-
-**Note:** Caprover keeps the previous image on failure — no downtime on broken deploys
+**App:** `webbografico` on Coolify (deploys via Dockerfile automatically on push to `main`)
 
 ### `/deps-update` - Safe Dependency Updates
 **Use when:** Weekly maintenance, security patches, package upgrades
@@ -239,6 +231,6 @@ Custom skills available for common Django workflows. Use these for automated qua
 4. **Backup before risk**: Use `/db-backup` before any potentially destructive operation
 5. **Update deps weekly**: Use `/deps-update` to keep dependencies secure and current
 6. **Clean monthly**: Use `/cleanup` to keep the project lean and the database optimized
-7. **Deploy with `/deploy`**: Never run `caprover deploy` manually — the skill validates everything first
+7. **Deploy with `/deploy`**: Never trigger Coolify webhook manually — the skill validates everything first
 8. **Trust the automation**: Skills handle edge cases and provide comprehensive checks
 9. **Follow the prompts**: Skills ask for confirmation when needed - review carefully
