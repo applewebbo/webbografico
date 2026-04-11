@@ -1,16 +1,17 @@
 ---
-title: "Menu"
-date: 2024-10-31
+title: "Menu Scolastico"
+date: 2026-03-19
 draft: false
 weight: 3
-short_desc: "The new version of the school menu app with user created content"
-live_url: "http://menu.webbografico.com"
-source_code_url: "https://github.com/applewebbo/school_menu"
+short_desc: "School menu tracker — check what your kids eat at school every day"
+live_url: "https://www.menuscolastico.it"
+source_code_url: "https://codeberg.org/webbografico/school_menu"
 hero_image: "hero_menu.jpg"
 technologies:
   - "Django"
   - "TailwindCSS"
   - "HTMX"
+  - "AlpineJS"
   - "PostgreSQL"
 gallery:
   - file: "responsive.jpg"
@@ -28,4 +29,8 @@ gallery:
 
 ---
 
-Lorem ipsum dolor sit amet. Ea iste galisum quo beatae aspernatur nam quia omnis a fugiat odit. Ut doloremque sunt et repellendus quis et omnis molestias ad aperiam quam! Vel aperiam excepturi id nostrum reiciendis ut distinctio incidunt ea ipsum fugiat non galisum recusandae et consectetur omnis. Aut necessitatibus animi ut aperiam reprehenderit eum suscipit quod et suscipit nihil et earum veritatis ea quibusdam sapiente ut eaque tempore. Eos impedit omnis cum ducimus incidunt At autem dolorem non perspiciatis incidunt et itaque fugiat cum sunt fugiat ad beatae numquam. Eos veritatis animi vel enim eligendi aut omnis voluptas et similique molestiae sed autem labore? Vel recusandae voluptatibus et maxime consequuntur qui iste totam vel sint consequatur non quaerat dolore in accusamus dolores. Eum optio reprehenderit est voluptas animi ut explicabo quaerat. Sit saepe ipsa qui provident quia ea excepturi quia id omnis architecto ut magni sint.
+Menu Scolastico nasce da un'esigenza pratica: sapere ogni giorno cosa mangia mio figlio a scuola, senza dover cercare tra fogli Excel o circolari cartacee. L'app permette ai genitori di consultare il menu della mensa in pochi tap, direttamente dal proprio smartphone.
+
+Le scuole possono caricare i propri menu settimanali tramite un template CSV, semplificando la gestione anche per chi non ha competenze tecniche. Ogni utente può registrarsi, seguire la propria scuola e ricevere notifiche sulle variazioni di menu.
+
+Il progetto è installabile come Progressive Web App (PWA) per un accesso rapido dalla schermata home del telefono. L'interfaccia è costruita con Django, TailwindCSS e HTMX per aggiornamenti dinamici, con AlpineJS per i componenti interattivi.

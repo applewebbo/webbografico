@@ -3,15 +3,15 @@ title: "WEBBOgrafico"
 date: 2024-10-26
 draft: false
 weight: 1
-short_desc: "This portfolio site built with django and tailwindcss"
+short_desc: "This portfolio site built with Hugo and tailwindcss"
 live_url: "https://webbografico.com"
-source_code_url: "https://github.com/applewebbo/webbografico"
+source_code_url: "https://codeberg.org/webbografico/webbografico"
 hero_image: "hero_webbografico.jpg"
 technologies:
-  - "Django"
+  - "Hugo"
   - "TailwindCSS"
-  - "HTMX"
-  - "SQlite"
+  - "DaisyUI"
+  - "AlpineJS"
 gallery:
   - file: "themes.jpg"
     alt: "immagine del sito con tema chiaro/scuro"
@@ -31,4 +31,8 @@ gallery:
 
 ---
 
-Lorem ipsum dolor sit amet. Ea iste galisum quo beatae aspernatur nam quia omnis a fugiat odit. Ut doloremque sunt et repellendus quis et omnis molestias ad aperiam quam! Vel aperiam excepturi id nostrum reiciendis ut distinctio incidunt ea ipsum fugiat non galisum recusandae et consectetur omnis. Aut necessitatibus animi ut aperiam reprehenderit eum suscipit quod et suscipit nihil et earum veritatis ea quibusdam sapiente ut eaque tempore. Eos impedit omnis cum ducimus incidunt At autem dolorem non perspiciatis incidunt et itaque fugiat cum sunt fugiat ad beatae numquam. Eos veritatis animi vel enim eligendi aut omnis voluptas et similique molestiae sed autem labore? Vel recusandae voluptatibus et maxime consequuntur qui iste totam vel sint consequatur non quaerat dolore in accusamus dolores. Eum optio reprehenderit est voluptas animi ut explicabo quaerat. Sit saepe ipsa qui provident quia ea excepturi quia id omnis architecto ut magni sint.
+WEBBOgrafico è il mio sito portfolio personale, nato per raccogliere e presentare i progetti che sviluppo nel tempo libero. È il posto dove mostro cosa so fare, come lo faccio e con quali tecnologie.
+
+Ogni progetto ha una pagina dedicata con descrizione, galleria immagini, link al codice sorgente e al sito live. Il sito supporta tema chiaro/scuro, è completamente responsive e include una pagina contatti.
+
+Il sito è costruito con Hugo per la generazione statica dei contenuti, Tailwind CSS v4 + DaisyUI v5 per lo stile e AlpineJS per i componenti interattivi come la galleria modale. Il deploy avviene tramite Coolify con un Dockerfile multi-stage (build Hugo → serve Nginx).
