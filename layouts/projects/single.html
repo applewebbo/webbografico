@@ -3,13 +3,15 @@
 {{ define "main" }}
 {{ partial "gallery-modal.html" . }}
 
+<div class="px-4 md:px-0">
+
 <h1 class="my-8 text-4xl font-bold tracking-tight text-center">{{ .Title }}</h1>
 
 <div class="grid grid-cols-2 gap-6 mb-8 lg:grid-cols-3">
   <div class="col-span-2">
     <img src="{{ .RelPermalink }}{{ .Params.hero_image }}"
          alt="{{ .Title }} marketing image"
-         class="w-full rounded-xl">
+         class="w-full rounded-lg md:rounded-xl">
   </div>
   <div class="col-span-2 lg:col-span-1 card bg-base-100">
     <div class="card-body">
@@ -42,16 +44,17 @@
 {{ with .Params.gallery }}
 <section id="other_images">
   <div x-data class="grid grid-cols-1 gap-3 my-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:my-8 xl:grid-cols-4">
-    {{ range . }}
+    {{ range $i, $img := . }}
     <figure>
-      <a @click="window.innerWidth >= 768 && $dispatch('img-modal', { imgModalSrc: '{{ $.RelPermalink }}{{ .file }}', imgModalDesc: '{{ .title }}' })"
-         class="cursor-pointer">
-        <img src="{{ $.RelPermalink }}{{ .file }}" alt="{{ .alt }}" class="mb-2 w-full rounded-xl cursor-default md:cursor-zoom-in">
+      <a @click="window.innerWidth >= 768 && $dispatch('gallery-open', { index: {{ $i }} })" class="md:cursor-zoom-in">
+        <img src="{{ $.RelPermalink }}{{ $img.file }}" alt="{{ $img.alt }}" class="mb-2 w-full rounded-lg md:rounded-xl">
       </a>
-      <figcaption class="text-sm italic text-center">{{ .title }}</figcaption>
+      <figcaption class="text-sm italic text-center">{{ $img.title }}</figcaption>
     </figure>
     {{ end }}
   </div>
 </section>
 {{ end }}
+
+</div>
 {{ end }}
