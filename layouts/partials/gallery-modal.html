@@ -4,7 +4,7 @@
     open: false,
     current: 0,
     images: {{ . | jsonify }},
-    baseUrl: '{{ $.RelPermalink }}',
+    baseUrl: '{{ printf "/img/projects/%s/" ($.File.Dir | path.Base) | relURL }}',
     show(index) { this.current = index; this.open = true; },
     prev() { this.current = (this.current - 1 + this.images.length) % this.images.length; },
     next() { this.current = (this.current + 1) % this.images.length; },

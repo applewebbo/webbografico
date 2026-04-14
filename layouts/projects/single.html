@@ -3,21 +3,23 @@
 {{ define "main" }}
 {{ partial "gallery-modal.html" . }}
 
+{{ $slug := .File.Dir | path.Base }}
+
 <div class="px-4 md:px-0">
 
 <h1 class="my-8 text-4xl font-bold tracking-tight text-center">{{ .Title }}</h1>
 
 <div class="grid grid-cols-2 gap-6 mb-8 lg:grid-cols-3">
   <div class="col-span-2">
-    <img src="{{ .RelPermalink }}{{ .Params.hero_image }}"
-         alt="{{ .Title }} marketing image"
+    <img src="{{ printf "/img/projects/%s/%s" $slug .Params.hero_image | relURL }}"
+         alt="{{ .Title }} {{ i18n "meta_marketing_image" }}"
          class="w-full rounded-lg md:rounded-xl">
   </div>
   <div class="col-span-2 lg:col-span-1 card bg-base-100">
     <div class="card-body">
       <div class="grid grid-cols-2 gap-4 lg:gap-2">
         <div class="col-span-2 sm:col-span-1 lg:col-span-2">
-          <h3 class="mb-3 text-xl font-semibold tracking-tight md:text-2xl">Tecnologie</h3>
+          <h3 class="mb-3 text-xl font-semibold tracking-tight md:text-2xl">{{ i18n "label_technologies" }}</h3>
           <div class="flex flex-wrap gap-2 mb-4">
             {{ range .Params.technologies }}
             <div class="rounded badge badge-accent">{{ . }}</div>
@@ -26,10 +28,10 @@
         </div>
         <div id="project-links" class="flex flex-col col-span-2 gap-4 my-4 sm:col-span-1 lg:col-span-2">
           {{ with .Params.live_url }}
-          <a href="{{ . }}" class="btn btn-secondary btn-block">Visita il sito</a>
+          <a href="{{ . }}" class="btn btn-secondary btn-block">{{ i18n "btn_preview_site" }}</a>
           {{ end }}
           {{ with .Params.source_code_url }}
-          <a href="{{ . }}" class="btn btn-secondary btn-block">Codice sorgente</a>
+          <a href="{{ . }}" class="btn btn-secondary btn-block">{{ i18n "btn_source_code" }}</a>
           {{ end }}
         </div>
       </div>
@@ -47,7 +49,7 @@
     {{ range $i, $img := . }}
     <figure>
       <a @click="window.innerWidth >= 768 && $dispatch('gallery-open', { index: {{ $i }} })" class="md:cursor-zoom-in">
-        <img src="{{ $.RelPermalink }}{{ $img.file }}" alt="{{ $img.alt }}" class="mb-2 w-full rounded-lg md:rounded-xl">
+        <img src="{{ printf "/img/projects/%s/%s" $slug $img.file | relURL }}" alt="{{ $img.alt }}" class="mb-2 w-full rounded-lg md:rounded-xl">
       </a>
       <figcaption class="text-sm italic text-center">{{ $img.title }}</figcaption>
     </figure>

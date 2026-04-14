@@ -1,7 +1,7 @@
 <div x-data="{ open: false }">
   <nav class="border-b shadow-md bg-base-100 border-base-300">
-    <div class="flex flex-wrap justify-between items-center py-2 px-2 mx-auto max-w-screen-lg md:py-4 md:px-4 lg:py-6">
-      <a href="{{ "/" | relURL }}" class="flex items-center space-x-3 rtl:space-x-reverse grow">
+    <div class="flex flex-wrap justify-between items-center py-2 px-2 mx-auto max-w-5xl md:py-4 md:px-4 lg:py-6">
+      <a href="{{ "/" | absLangURL }}" class="flex items-center space-x-3 rtl:space-x-reverse grow">
         <img src="{{ "img/logo-panda.png" | relURL }}" class="h-8" alt="Logo">
         <span class="self-center text-base font-semibold tracking-tight whitespace-nowrap md:text-2xl dark:text-white">WEBBOgrafico</span>
       </a>
@@ -13,26 +13,38 @@
         <button class="mr-2" x-on:click="darkMode = true" x-show="!darkMode">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/></svg>
         </button>
+        <!-- language toggle -->
+        <div class="flex gap-1 items-center ml-1 text-sm font-medium">
+          {{ $itURL := "/" | relLangURL }}
+          {{ $enURL := "/" | relLangURL | strings.Replace (printf "/%s/" .Site.Language.Lang) "/en/" }}
+          {{ with .Translations }}{{ range . }}{{ if eq .Lang "it" }}{{ $itURL = .RelPermalink }}{{ else }}{{ $enURL = .RelPermalink }}{{ end }}{{ end }}{{ end }}
+          <a href="{{ $itURL }}"
+             class="{{ if eq .Site.Language.Lang "it" }}text-primary font-bold{{ else }}text-base-content opacity-50 hover:opacity-100{{ end }}">IT</a>
+          <span class="opacity-30">|</span>
+          <a href="{{ $enURL }}"
+             class="{{ if eq .Site.Language.Lang "en" }}text-primary font-bold{{ else }}text-base-content opacity-50 hover:opacity-100{{ end }}">EN</a>
+        </div>
       </div>
       <div class="flex items-end space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
         <button type="button"
                 class="inline-flex justify-center items-center p-2 w-10 h-10 text-sm text-gray-500 rounded-lg md:hidden dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                 x-on:click="open = ! open">
-          <span class="sr-only">Apri menu principale</span>
+          <span class="sr-only">{{ i18n "nav_open_menu" }}</span>
           <svg x-show="! open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd"/></svg>
           <svg x-show="open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/></svg>
         </button>
       </div>
       <div class="hidden justify-between items-center w-full md:flex md:order-1 md:w-auto md:me-8">
         <ul class="flex flex-col p-4 mt-4 font-medium rounded-lg border border-gray-100 md:flex-row md:p-0 md:mt-0 md:space-x-8 md:border-0 rtl:space-x-reverse">
+          {{ range .Site.Menus.main }}
+          {{ $active := or (and (eq .URL "/") $.IsHome) (and (ne .URL "/") (strings.HasPrefix $.RelPermalink (printf "/%s%s" $.Site.Language.Lang .URL))) }}
           <li>
-            <a href="{{ "/" | relURL }}"
-               class="block p-0 {{ if .IsHome }}text-primary{{ else }}text-base-content hover:text-secondary{{ end }}"
-               {{ if .IsHome }}aria-current="page"{{ end }}>Home</a>
+            <a href="{{ .URL | absLangURL }}"
+               class="block p-0 {{ if $active }}text-primary{{ else }}text-base-content hover:text-secondary{{ end }}">
+              {{ .Name }}
+            </a>
           </li>
-          <li>
-            <a href="{{ "/about/" | relURL }}" class="block p-0 {{ if eq .RelPermalink "/about/" }}text-primary{{ else }}text-base-content hover:text-secondary{{ end }}">Chi sono</a>
-          </li>
+          {{ end }}
         </ul>
       </div>
     </div>
@@ -42,14 +54,15 @@
          x-show="open"
          x-collapse.duration.500>
       <ul class="flex flex-col gap-x-0 gap-y-3 p-4 px-5">
+        {{ range .Site.Menus.main }}
+        {{ $active := or (and (eq .URL "/") $.IsHome) (and (ne .URL "/") (strings.HasPrefix $.RelPermalink (printf "/%s%s" $.Site.Language.Lang .URL))) }}
         <li>
-          <a href="{{ "/" | relURL }}"
-             class="block py-2 px-3 rounded md:p-0 {{ if .IsHome }}current{{ else }}text-base-content hover:bg-base-200{{ end }}"
-             {{ if .IsHome }}aria-current="page"{{ end }}>Home</a>
+          <a href="{{ .URL | absLangURL }}"
+             class="block py-2 px-3 rounded {{ if $active }}current{{ else }}text-base-content hover:bg-base-200{{ end }}">
+            {{ .Name }}
+          </a>
         </li>
-        <li>
-          <a href="{{ "/about/" | relURL }}" class="block py-2 px-3 rounded {{ if eq .RelPermalink "/about/" }}current{{ else }}text-base-content hover:bg-base-200{{ end }}">Chi sono</a>
-        </li>
+        {{ end }}
       </ul>
     </div>
   </nav>

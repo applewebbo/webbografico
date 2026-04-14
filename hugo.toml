@@ -1,23 +1,55 @@
 baseURL = 'https://webbografico.com/'
 defaultContentLanguage = 'it'
-languageCode = 'it'
+defaultContentLanguageInSubdir = true
 title = 'WEBBOgrafico'
+
+[languages]
+
+[languages.en]
+contentDir = 'content'
+languageCode = 'en'
+languageName = 'English'
+weight = 2
+
+[[languages.en.menus.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[languages.en.menus.main]]
+name = "About"
+url = "/about/"
+weight = 2
+
+[languages.en.params]
+description = "Personal blog and portfolio website"
+keywords = "personal, blog, portfolio, web development"
+
+[languages.it]
+contentDir = 'content'
+languageCode = 'it'
+languageName = 'Italiano'
+weight = 1
+
+[[languages.it.menus.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[languages.it.menus.main]]
+name = "Chi sono"
+url = "/about/"
+weight = 2
+
+[languages.it.params]
+description = "Blog e portfolio personale"
+keywords = "personale, blog, portfolio, sviluppo web"
 
 [markup.goldmark.renderer]
 unsafe = true
 
 [markup.highlight]
 noClasses = false
-
-[[menus.main]]
-name = "Home"
-url = "/"
-weight = 1
-
-[[menus.main]]
-name = "About"
-url = "/about/"
-weight = 2
 
 [outputs]
 home = ["HTML"]
@@ -26,8 +58,6 @@ section = ["HTML"]
 
 [params]
 author = "WEBBOgrafico"
-description = "Personal blog and portfolio website"
-keywords = "personal, blog, portfolio, web development"
 
 [taxonomies]
 tag = "tags"
