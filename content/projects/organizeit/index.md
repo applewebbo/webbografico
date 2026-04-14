@@ -3,7 +3,7 @@ title: "Organizeit!"
 date: 2026-04-14
 draft: false
 weight: 3
-short_desc: "Collaborative trip planner with itinerary, transfers and weather"
+short_desc: "Pianifica i tuoi viaggi in modo collaborativo con itinerario e meteo"
 live_url: "https://www.organizeit.webbografico.com"
 source_code_url: "https://codeberg.org/webbografico/organize_it"
 hero_image: "hero_organizeit.jpg"
@@ -14,33 +14,33 @@ technologies:
   - "PostgreSQL"
 gallery:
   - file: "1_theme.jpg"
-    alt: "Organizeit homepage in dark mode with two-tone layout and Create your first trip call-to-action"
-    title: "Light/Dark Theme"
+    alt: "Homepage di Organizeit in tema scuro con layout a due colori e call-to-action Crea il tuo primo viaggio"
+    title: "Tema Chiaro/Scuro"
   - file: "2_documentation.jpg"
-    alt: "How it works page showing 8 concept sections (Trips, Days, Stays, Experiences, Meals, Transfers, Collaboration, Sharing) alongside the English documentation page"
-    title: "Documentation"
+    alt: "Pagina Come funziona con le 8 sezioni concettuali (Viaggi, Giorni, Soggiorni, Esperienze, Pasti, Trasferimenti, Collaborazione, Condivisione) e documentazione in inglese"
+    title: "Documentazione"
   - file: "3_trip_detail.jpg"
-    alt: "Trip detail for Viaggio di Nozze 2026 in Rome with hero image, dates, collaborators and daily agenda showing events, weather and accommodations"
-    title: "Trip Detail"
+    alt: "Dettaglio del Viaggio di Nozze 2026 a Roma con immagine hero, date, collaboratori e agenda giornaliera con eventi, meteo e soggiorni"
+    title: "Dettaglio Viaggio"
   - file: "4_add_transport.jpg"
-    alt: "Add return transfer modal with transport type selection (Plane, Train, Car, Other), flight form with IATA airport search and outbound/return transfer summary"
-    title: "Add Transfer"
+    alt: "Modale di aggiunta trasferimento con selezione mezzo (Aeroplano, Treno, Automobile, Altro), form volo con ricerca aeroporto per codice IATA e riepilogo trasferimenti andata/ritorno"
+    title: "Aggiungi Trasferimento"
   - file: "5_trip_list.jpg"
-    alt: "Personal trips list with three cards (Rome holiday completed, Florence trip in progress, Easter holiday upcoming) with weather forecasts and quick actions"
-    title: "Trips List"
+    alt: "Lista dei viaggi personali con tre card (Vacanze in Roma completata, Gita a Firenze in corso, Vacanze di Pasqua imminente), previsioni meteo e azioni rapide"
+    title: "Lista Viaggi"
   - file: "6_enrich_experience.jpg"
-    alt: "Enrich feature on an event: comparison between basic card (Musei Capitolini, time) and enriched card with website, phone number and opening hours fetched automatically"
-    title: "Enrich Experience"
+    alt: "Funzione Arricchisci su un evento: confronto tra scheda base (Musei Capitolini, orario) e scheda arricchita con sito web, telefono e orari di apertura recuperati automaticamente"
+    title: "Arricchisci Esperienza"
   - file: "7_profile.jpg"
-    alt: "Settings page with personal details, home address to pre-fill car transfers, avatar selection and travel preferences including currency and favourite trip"
-    title: "Profile Settings"
+    alt: "Pagina impostazioni con dati personali, indirizzo di casa per precompilare i trasferimenti in auto, selezione avatar e preferenze di viaggio con valuta e viaggio preferito"
+    title: "Impostazioni Profilo"
 
 ---
 
-Organizeit! is a web application for planning trips in a comprehensive and collaborative way. It lets you structure every trip by day, adding stays, experiences, meals and daily transfers to each one — all viewable on an interactive map with integrated weather forecasts.
+Organizeit! è un'applicazione web per pianificare viaggi in modo completo e collaborativo. Permette di strutturare ogni viaggio per giorni, aggiungendo per ciascuno soggiorni, esperienze, pasti e trasferimenti giornalieri, il tutto visualizzabile su mappa interattiva con previsioni meteo integrate.
 
-At the core of the app is the daily itinerary: each day of the trip can contain categorised events (museums, restaurants, hotels, attractions) with times, addresses and notes. The Enrich feature automatically queries external sources to add the official website, phone number and opening hours to any event — reducing the time spent hunting for scattered information.
+Il cuore dell'app è l'itinerario giornaliero: ogni giorno del viaggio può contenere eventi categorizzati (musei, ristoranti, hotel, attrazioni) con orari, indirizzi e note. La funzione "Arricchisci" interroga automaticamente fonti esterne per aggiungere agli eventi sito ufficiale, numero di telefono e orari di apertura — riducendo il tempo speso a cercare informazioni sparse.
 
-Main transfers (outbound and return) support flights, trains, cars and other transport: for flights, an airport search by name, city or IATA code is available. Car transfers are pre-filled with the home address set in the user profile.
+I trasferimenti principali (andata e ritorno) supportano voli, treni, automobili e altri mezzi: per i voli è disponibile una ricerca aeroporti per nome, città o codice IATA. I trasferimenti in automobile si precompilano con l'indirizzo di casa impostato nel profilo utente.
 
-Collaboration is built in: the trip plan can be shared with friends or family without requiring them to create an account. The shared trip is viewable in read-only mode by anyone with the link. The interface is available in Italian and English and supports light/dark theme.
+La collaborazione è nativa: è possibile condividere il piano di viaggio con amici o familiari senza richiedere loro un account. Il viaggio condiviso è visualizzabile in sola lettura da chiunque abbia il link. L'interfaccia è disponibile in italiano e inglese e supporta tema chiaro/scuro.

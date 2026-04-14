@@ -17,7 +17,7 @@
     <div class="card-body">
       <div class="grid grid-cols-2 gap-4 lg:gap-2">
         <div class="col-span-2 sm:col-span-1 lg:col-span-2">
-          <h3 class="mb-3 text-xl font-semibold tracking-tight md:text-2xl">Technologies</h3>
+          <h3 class="mb-3 text-xl font-semibold tracking-tight md:text-2xl">Tecnologie</h3>
           <div class="flex flex-wrap gap-2 mb-4">
             {{ range .Params.technologies }}
             <div class="rounded badge badge-accent">{{ . }}</div>
@@ -26,10 +26,10 @@
         </div>
         <div id="project-links" class="flex flex-col col-span-2 gap-4 my-4 sm:col-span-1 lg:col-span-2">
           {{ with .Params.live_url }}
-          <a href="{{ . }}" class="btn btn-secondary btn-block">Preview Site</a>
+          <a href="{{ . }}" class="btn btn-secondary btn-block">Visita il sito</a>
           {{ end }}
           {{ with .Params.source_code_url }}
-          <a href="{{ . }}" class="btn btn-secondary btn-block">View Code</a>
+          <a href="{{ . }}" class="btn btn-secondary btn-block">Codice sorgente</a>
           {{ end }}
         </div>
       </div>

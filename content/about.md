@@ -1,5 +1,5 @@
 ---
-title: About
+title: Chi sono
 layout: about
 links:
   - name: codeberg.org/webbografico
@@ -10,6 +10,6 @@ links:
     image: img/mastodon.svg
 ---
 
-Hi everyone! I'm Enrico, a web developer and this is my portfolio.
+Ciao a tutti! Sono Enrico, un web developer e questo è il mio portfolio.
 
-I build web applications with a focus on simplicity and usability. I enjoy working with Python, Django, and modern frontend tools.
+Sviluppo applicazioni web con attenzione alla semplicità e all'usabilità. Mi piace lavorare con Python, Django e strumenti frontend moderni.

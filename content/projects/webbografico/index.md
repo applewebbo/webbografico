@@ -3,7 +3,7 @@ title: "WEBBOgrafico"
 date: 2024-10-26
 draft: false
 weight: 1
-short_desc: "This portfolio site built with Hugo and tailwindcss"
+short_desc: "Questo sito portfolio realizzato con Hugo e TailwindCSS"
 live_url: "https://webbografico.com"
 source_code_url: "https://codeberg.org/webbografico/webbografico"
 hero_image: "hero_webbografico.jpg"

@@ -3,7 +3,7 @@ title: "TranTrac"
 date: 2026-04-11
 draft: false
 weight: 2
-short_desc: "Family expense tracker with Telegram integration and monthly PDF reports"
+short_desc: "Gestione spese familiari con bot Telegram e report PDF mensili"
 live_url: "https://trantrac.webbografico.com"
 source_code_url: "https://codeberg.org/webbografico/trantrac"
 hero_image: "hero_trantrac.jpg"

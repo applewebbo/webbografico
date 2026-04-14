@@ -3,7 +3,7 @@ title: "Menu Scolastico"
 date: 2026-03-19
 draft: false
 weight: 3
-short_desc: "School menu tracker — check what your kids eat at school every day"
+short_desc: "Scopri ogni giorno cosa mangia tuo figlio a mensa"
 live_url: "https://www.menuscolastico.it"
 source_code_url: "https://codeberg.org/webbografico/school_menu"
 hero_image: "hero_menu.jpg"
