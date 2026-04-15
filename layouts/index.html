@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<section id="projects" class="my-8 md:my-12 lg:my-16">
+<section id="projects" class="px-4 my-8 md:px-0 md:my-12 lg:my-16">
   <h1 class="section-title">{{ i18n "section_projects" }}</h1>
   {{ $projects := where .Site.RegularPages "Section" "projects" }}
   {{ if $projects }}
@@ -27,7 +27,7 @@
   {{ end }}
 </section>
 
-<section id="blog" class="my-8 md:my-12 lg:my-16">
+<section id="blog" class="px-4 my-8 md:px-0 md:my-12 lg:my-16">
   <h1 class="section-title">{{ i18n "section_blog" }} <span class="inline-block py-0.5 px-2.5 text-xs font-medium align-top rounded bg-accent text-accent-content me-2">{{ i18n "coming_soon" }}</span></h1>
   {{ $posts := where .Site.RegularPages "Section" "blog" }}
   {{ if $posts }}

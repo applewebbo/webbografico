@@ -1,6 +1,6 @@
 # Skill: add-project
 
-Analizza un sito web e crea automaticamente una pagina progetto per webbografico.com.
+Analizza un sito web e crea automaticamente una pagina progetto per webbografico.com in entrambe le lingue (IT e EN).
 
 ## Usage
 
@@ -16,10 +16,20 @@ Analizza un sito web e crea automaticamente una pagina progetto per webbografico
 ## What This Skill Does
 
 1. **Analisi del sito** — Visita l'URL con Playwright per esplorare le pagine principali e raccogliere informazioni su titolo, descrizione, tecnologie e funzionalità
-2. **Generazione metadata** — Produce una bozza completa di frontmatter Hugo (title, short_desc, technologies, live_url, source_code_url) e un corpo descrittivo in italiano
+2. **Generazione metadata** — Produce una bozza completa di frontmatter Hugo e testi descrittivi sia in **italiano** che in **inglese**
 3. **Revisione utente** — Mostra la bozza e chiede conferma o modifiche prima di procedere
-4. **Screenshot** — Chiede all'utente una cartella con gli screenshot già preparati; li analizza per generare `alt` e `title` accurati; il primo file alfabetico è la hero image
-5. **Creazione pagina** — Copia le immagini in `content/projects/<slug>/`, scrive `index.md`
+4. **Screenshot** — Chiede all'utente una cartella con gli screenshot già preparati; li analizza per generare `alt` e `title` accurati in entrambe le lingue
+5. **Creazione pagine** — Copia le immagini in `static/img/projects/<slug>/`, scrive `index.it.md` e `index.en.md` in `content/projects/<slug>/`
+
+## Site Structure
+
+Il sito usa Hugo con supporto multilingua IT/EN:
+
+- **Contenuto**: `content/projects/<slug>/index.it.md` e `index.en.md`
+- **Immagini**: `static/img/projects/<slug>/` (condivise tra le due lingue, NON in content/)
+- **URL IT**: `/it/projects/<slug>/`
+- **URL EN**: `/en/projects/<slug>/`
+- **i18n UI**: stringhe dell'interfaccia in `i18n/it.yaml` e `i18n/en.yaml` (non toccare per i contenuti dei progetti)
 
 ## Step-by-step Instructions
 
@@ -40,17 +50,16 @@ Usa gli strumenti Playwright (`mcp__playwright__*`) per:
 
 Se Playwright non è disponibile, usa WebFetch sull'URL per estrarre il testo della pagina.
 
-### Step 3 — Genera bozza metadata e descrizione
+### Step 3 — Genera bozza metadata e descrizioni
 
-Produci:
+Produci il frontmatter (condiviso tra le due lingue) e due versioni del testo descrittivo:
 
 ```yaml
-# FRONTMATTER PROPOSTO
+# FRONTMATTER (uguale per IT e EN, solo short_desc cambia)
 title: "<nome progetto>"
 date: "<data odierna YYYY-MM-DD>"
 draft: false
 weight: <suggerisci un numero intero, es. 5>
-short_desc: "<una riga, max 80 char, in inglese>"
 live_url: "<URL fornito>"
 source_code_url: "<URL sorgente se trovato, altrimenti chiedi>"
 hero_image: "hero_<slug>.jpg"
@@ -58,29 +67,32 @@ technologies:
   - "<tech1>"
   - "<tech2>"
   ...
+
+# short_desc IT: una riga, max 80 char, in italiano
+# short_desc EN: una riga, max 80 char, in inglese
 ```
 
-E una **descrizione in italiano** (3–5 paragrafi) che spieghi:
-- Cos'è il progetto e a chi si rivolge
-- Funzionalità principali
-- Scelte tecniche interessanti
-- Eventuali sfide o aspetti notevoli
+E due versioni della **descrizione** (3–5 paragrafi ciascuna):
+- **IT**: in italiano, spiega cos'è, funzionalità principali, scelte tecniche
+- **EN**: in inglese, stesso contenuto tradotto
 
 ### Step 4 — Mostra bozza e chiedi conferma
 
-Mostra all'utente il frontmatter e la descrizione proposti in un blocco markdown.
+Mostra all'utente frontmatter, descrizione IT e descrizione EN in blocchi markdown separati.
 
 Chiedi:
-- Conferma per procedere con questi dati
-- Oppure indica cosa modificare (titolo, descrizione, tecnologie, source_code_url mancante, ecc.)
+- Conferma per procedere
+- Oppure indica cosa modificare
 
-Applica le modifiche richieste e mostra di nuovo se necessario, prima di procedere.
+Applica le modifiche richieste prima di procedere.
 
 ### Step 5 — Chiedi la cartella degli screenshot
 
 Dopo la conferma dei metadati, chiedi all'utente:
 
-> Indica il percorso della cartella che contiene gli screenshot già preparati (es. `~/Desktop/trantrac-screenshots/`). Il primo file in ordine alfabetico sarà usato come **hero image**; gli altri come gallery. Usa nomi file descrittivi (es. `dashboard.jpg`, `reports.jpg`, `telegram.jpg`).
+> Indica il percorso della cartella che contiene gli screenshot già preparati (es. `~/Desktop/trantrac-screenshots/`). Il primo file in ordine alfabetico sarà usato come **hero image**; gli altri come gallery. Usa nomi file descrittivi (es. `dashboard.jpg`, `reports.jpg`).
+
+Se le immagini sono già in `content/projects/<slug>/` (caricate manualmente), usale direttamente saltando la copia.
 
 Attendi la risposta dell'utente con il percorso della cartella.
 
@@ -92,37 +104,44 @@ Per ogni file immagine nella cartella fornita (ordine alfabetico):
 
 1. Leggila con il tool `Read` (supporta PNG/JPG)
 2. Osserva visivamente cosa mostra: interfaccia, funzionalità, contesto
-3. Genera:
-   - `alt`: descrizione accessibile e dettagliata di cosa si vede nell'immagine (in italiano)
-   - `title`: etichetta breve per la gallery (in italiano, 2–4 parole)
+3. Genera per ciascuna:
+   - `alt` IT: descrizione accessibile e dettagliata in italiano
+   - `title` IT: etichetta breve per la gallery (2–4 parole, italiano)
+   - `alt` EN: stessa descrizione in inglese
+   - `title` EN: stessa etichetta in inglese
 
 Il **primo file** (ordine alfabetico) è la **hero image**: rinominalo `hero_<slug>.jpg`.
-Gli altri sono la gallery: mantieni il nome originale (senza estensione cambiata).
 
-Mostra all'utente la lista con alt/title proposti e chiedi conferma o correzioni prima di copiare i file.
+Mostra all'utente la tabella con alt/title IT e EN proposti e chiedi conferma prima di procedere.
 
-### Step 7 — Copia le immagini
+### Step 7 — Copia le immagini in static/
 
-Crea la cartella `content/projects/<slug>/` se non esiste.
+**Le immagini vanno in `static/img/projects/<slug>/`**, NON in `content/projects/<slug>/`.
+
+Crea la cartella `static/img/projects/<slug>/` se non esiste.
 
 Per ogni immagine:
-- Hero: copia come `content/projects/<slug>/hero_<slug>.jpg`
-- Gallery: copia mantenendo il nome originale in `content/projects/<slug>/`
+- Hero: copia come `static/img/projects/<slug>/hero_<slug>.jpg`
+- Gallery: copia mantenendo il nome originale in `static/img/projects/<slug>/`
+
+Se le immagini erano già in `content/projects/<slug>/`, copiale in static e non rimuoverle dal content (le immagini in content non vengono usate ma non danneggiano).
 
 Usa il tool Bash con `cp` per copiare i file.
 
-### Step 8 — Crea index.md
+### Step 8 — Crea index.it.md e index.en.md
 
-Scrivi il file `content/projects/<slug>/index.md` con il frontmatter finale e la descrizione in italiano nel corpo.
+Crea la cartella `content/projects/<slug>/` se non esiste.
 
-Formato esatto:
+Scrivi **due file separati**:
+
+**`content/projects/<slug>/index.it.md`** — versione italiana:
 ```markdown
 ---
 title: "..."
 date: ...
 draft: false
 weight: ...
-short_desc: "..."
+short_desc: "... (in italiano)"
 live_url: "..."
 source_code_url: "..."
 hero_image: "hero_<slug>.jpg"
@@ -130,26 +149,51 @@ technologies:
   - "..."
 gallery:
   - file: "..."
-    alt: "..."
-    title: "..."
+    alt: "... (in italiano)"
+    title: "... (in italiano)"
 ---
 
 <descrizione in italiano>
 ```
 
+**`content/projects/<slug>/index.en.md`** — versione inglese:
+```markdown
+---
+title: "..."
+date: ...
+draft: false
+weight: ...
+short_desc: "... (in inglese)"
+live_url: "..."
+source_code_url: "..."
+hero_image: "hero_<slug>.jpg"
+technologies:
+  - "..."
+gallery:
+  - file: "..."
+    alt: "... (in inglese)"
+    title: "... (in inglese)"
+---
+
+<descrizione in inglese>
+```
+
+Nota: `title`, `technologies`, `live_url`, `source_code_url`, `hero_image` e i `file` della gallery sono identici in entrambi i file. Cambiano: `short_desc`, `alt`, `title` della gallery e il corpo della descrizione.
+
 ### Step 9 — Riepilogo finale
 
 Mostra all'utente:
-- Percorso della pagina creata
-- Lista delle immagini copiate con i rispettivi alt/title
-- Suggerimento di eseguire `just serve` per verificare il risultato
+- Percorsi dei file creati (`index.it.md`, `index.en.md`, immagini in `static/`)
+- Lista delle immagini con alt/title IT e EN
+- Suggerimento di eseguire `just serve` per verificare il risultato su `/it/projects/<slug>/` e `/en/projects/<slug>/`
 - Ricorda di usare `/commit` per committare le modifiche
 
 ## Notes
 
-- L'utente gestisce formati e dimensioni degli screenshot — non imporre vincoli di aspect ratio
-- La hero image è sempre il primo file in ordine alfabetico: suggerisci all'utente di nominarlo `01_...` o `hero_...` per controllare l'ordine
+- **Immagini sempre in `static/img/projects/<slug>/`** — mai in `content/` per i progetti
+- La hero image è sempre il primo file in ordine alfabetico: suggerisci di nominarla `hero_...` o `01_...`
 - `source_code_url` è opzionale ma raccomandata: cercala nel sito o chiedi all'utente
 - Il `weight` controlla l'ordine nella lista progetti: valori più bassi appaiono prima
 - Non inventare tecnologie: indicale solo se visibili nel sito o deducibili con certezza
+- `title` del progetto è invariato tra IT e EN (nome proprio dell'app)
 - Se la cartella screenshot non esiste o è vuota, avvisa l'utente e attendi
