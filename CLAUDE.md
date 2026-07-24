@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal website/portfolio hosted at https://webbografico.com. Built with Hugo, Tailwind CSS v4 + DaisyUI v5 (standalone binaries), and AlpineJS. Deployed via Caprover with a multi-stage Dockerfile (Hugo build → Nginx serve).
+Personal website/portfolio hosted at https://webbografico.com. Built with Hugo, Tailwind CSS v4 + DaisyUI v5 (standalone binaries), and AlpineJS. Deployed via Coolify with a multi-stage Dockerfile (Hugo build → Nginx serve).
 
 ## Tech Stack
 
@@ -13,7 +13,7 @@ Personal website/portfolio hosted at https://webbografico.com. Built with Hugo, 
 - **JS**: AlpineJS (local files in `static/js/`)
 - **Server**: Nginx
 - **Task Runner**: just (see justfile)
-- **Repository**: Codeberg (https://codeberg.org/webbografico/webbografico)
+- **Repository**: GitHub (https://github.com/applewebbo/webbografico)
 
 ## Development Commands
 
@@ -31,21 +31,19 @@ just lint        # Run pre-commit hooks
 just lint-stage  # Lint and auto-stage all changes (use before commit)
 ```
 
-### Issue Management (Codeberg)
+### Issue Management (GitHub)
 ```bash
 just issues [state]                  # List issues (open|closed|all)
-just issue <number>                  # Show issue details
+just issue <number>                  # Show issue details (with comments)
 just issue-body <number>             # Print raw markdown body
 just issue-create <title> [body]     # Create new issue
 just issue-comment <number> <text>   # Add comment
-just issue-check <number> <step>     # Check a single task by text
-just issue-check-all <number>        # Check all unchecked tasks
 just issue-close <number>            # Close issue
 just issue-reopen <number>           # Reopen issue
 just issue-label <number> <labels>   # Add labels
 ```
 
-**Note**: The project is hosted on Codeberg. Use the justfile commands above to manage issues.
+**Note**: The project is hosted on GitHub. The justfile commands wrap the `gh` CLI (targeting `applewebbo/webbografico`).
 
 ## Architecture
 
@@ -86,7 +84,7 @@ git add static/css/tailwind.css
 ### Production Deployment
 - Multi-stage Dockerfile: `hugomods/hugo:exts` builds → `nginx:alpine` serves
 - `nginx.conf`: gzip, 1yr cache on static assets, custom 404
-- `captain-definition` points to Dockerfile
+- Coolify builds from the `Dockerfile` and auto-deploys on push to `main`
 
 ## Pre-commit Hooks
 

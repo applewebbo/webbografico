@@ -2,9 +2,9 @@
 title: Chi sono
 layout: about
 links:
-  - name: codeberg.org/webbografico
-    url: https://codeberg.org/webbografico
-    image: img/codeberg.svg
+  - name: github.com/applewebbo
+    url: https://github.com/applewebbo
+    image: img/github.svg
   - name: "@webbografico@hachyderm.io"
     url: https://hachyderm.io/@webbografico
     image: img/mastodon.svg

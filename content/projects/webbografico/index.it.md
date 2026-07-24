@@ -5,7 +5,7 @@ draft: false
 weight: 1
 short_desc: "Questo sito portfolio realizzato con Hugo e TailwindCSS"
 live_url: "https://webbografico.com"
-source_code_url: "https://codeberg.org/webbografico/webbografico"
+source_code_url: "https://github.com/applewebbo/webbografico"
 hero_image: "hero_webbografico.jpg"
 technologies:
   - "Hugo"

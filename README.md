@@ -8,7 +8,7 @@ Personal website and portfolio at [webbografico.com](https://webbografico.com).
 - [Tailwind CSS v4](https://tailwindcss.com/) + [DaisyUI v5](https://daisyui.com/) — standalone binaries, zero Node/npm
 - [AlpineJS](https://alpinejs.dev/) — dark mode toggle, gallery modal
 - [Nginx](https://nginx.org/) — production server
-- [Caprover](https://caprover.com/) — deployment
+- [Coolify](https://coolify.io/) — deployment
 
 ## Development
 
@@ -49,7 +49,7 @@ Open the `content/` folder as an Obsidian vault. No Hugo knowledge required.
    weight: 1
    short_desc: "Short description for the card"
    live_url: "https://example.com"
-   source_code_url: "https://codeberg.org/..."
+   source_code_url: "https://github.com/..."
    technologies: ["Django", "HTMX", "Tailwind"]
    hero_image: "hero.jpg"
    gallery:
@@ -110,38 +110,21 @@ git add static/css/tailwind.css
 git add .
 git commit -m "add project: <name>"
 git push
-# Caprover auto-rebuilds from Codeberg
+# Coolify auto-rebuilds from GitHub
 ```
 
 ## Deployment
 
 Multi-stage Dockerfile: Hugo builds the static site → Nginx serves it. No Python, no Node in the final image.
 
-### Deploy via CLI (current)
+### Deploy via Coolify (current)
 
-```bash
-caprover deploy --host https://captain.<your-domain> --appName webbografico --branch main
-```
+Coolify is connected directly to the GitHub repository and auto-deploys on every push to `main`.
 
-Or interactively:
-```bash
-caprover deploy
-```
-
-### Deploy via Webhook (recommended)
-
-Set up once, then every push to `main` on Codeberg triggers an automatic deploy.
-
-**1. Enable webhook in Caprover**
-- Open Caprover dashboard → Apps → `webbografico` → Deployment tab
-- Enable "Trigger Build on Push" → copy the webhook URL
-
-**2. Add webhook in Codeberg**
-- Go to repo Settings → Webhooks → Add Webhook
-- Payload URL: paste the Caprover webhook URL
-- Content type: `application/json`
-- Trigger: "Push events" on branch `main`
-- Save
+**One-time setup**
+- Coolify dashboard → Sources → connect the GitHub App (or add the repo as git source)
+- Create the application from `applewebbo/webbografico`, branch `main`, build pack Dockerfile
+- Enable "Auto Deploy" so pushes to `main` trigger a rebuild
 
 From that point, `git push origin main` automatically rebuilds and deploys.
 

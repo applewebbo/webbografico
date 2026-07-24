@@ -5,7 +5,7 @@ draft: false
 weight: 3
 short_desc: "Collaborative trip planner with itinerary, transfers and weather"
 live_url: "https://www.organizeit.webbografico.com"
-source_code_url: "https://codeberg.org/webbografico/organize_it"
+source_code_url: "https://github.com/applewebbo/organize_it"
 hero_image: "hero_organizeit.jpg"
 technologies:
   - "Django"
