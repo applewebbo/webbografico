@@ -67,180 +67,95 @@ beans_completed:
     beans list -s completed
 
 # ============================================================================
-# Codeberg Issues
+# GitHub Issues
 # ============================================================================
 
 # List issues (state: open|closed|all)
-[group: 'codeberg']
+[group: 'github']
 issues state="open":
-    ./bin/codeberg list {{state}}
+    gh issue list -R applewebbo/webbografico --state {{state}}
 
-# Show issue details
-[group: 'codeberg']
+# Show issue details (with comments)
+[group: 'github']
 issue number:
-    ./bin/codeberg show {{number}}
+    gh issue view -R applewebbo/webbografico {{number}} --comments
 
 # Print raw body of an issue (markdown)
-[group: 'codeberg']
+[group: 'github']
 issue-body number:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    TOKEN=$(grep "^CODEBERG_API_TOKEN=" .env | cut -d'=' -f2 | tr -d '"' | tr -d "'")
-    curl -s "https://codeberg.org/api/v1/repos/webbografico/webbografico/issues/{{number}}" \
-      -H "Authorization: token ${TOKEN}" | jq -r '.body'
+    gh issue view -R applewebbo/webbografico {{number}} --json body -q .body
 
 # Add comment to issue
-[group: 'codeberg']
+[group: 'github']
 issue-comment number text:
-    ./bin/codeberg comment {{number}} "{{text}}"
-
-# Mark a checkbox step as done in issue body
-[group: 'codeberg']
-issue-check number step:
-    ./bin/codeberg check {{number}} "{{step}}"
-
-# Mark all unchecked checkboxes as done in issue body
-[group: 'codeberg']
-issue-check-all number:
-    ./bin/codeberg check-all {{number}}
+    gh issue comment -R applewebbo/webbografico {{number}} -b "{{text}}"
 
 # Close issue
-[group: 'codeberg']
+[group: 'github']
 issue-close number:
-    ./bin/codeberg close {{number}}
+    gh issue close -R applewebbo/webbografico {{number}}
 
 # Reopen issue
-[group: 'codeberg']
+[group: 'github']
 issue-reopen number:
-    ./bin/codeberg reopen {{number}}
+    gh issue reopen -R applewebbo/webbografico {{number}}
 
 # Add labels to issue (space-separated)
-[group: 'codeberg']
+[group: 'github']
 issue-label number *labels:
-    ./bin/codeberg label {{number}} {{labels}}
+    #!/usr/bin/env bash
+    set -euo pipefail
+    for label in {{labels}}; do
+        gh issue edit -R applewebbo/webbografico {{number}} --add-label "$label"
+    done
 
 # Create new issue
-[group: 'codeberg']
+[group: 'github']
 issue-create title body="":
-    ./bin/codeberg create "{{title}}" {{ quote(body) }}
+    gh issue create -R applewebbo/webbografico --title "{{title}}" --body {{ quote(body) }}
 
 # ============================================================================
-# Codeberg Releases
+# GitHub Releases
 # ============================================================================
 
 # List all releases
-[group: 'codeberg']
+[group: 'github']
 release-list:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    TOKEN=$(grep "^CODEBERG_API_TOKEN=" .env | cut -d'=' -f2 | tr -d '"' | tr -d "'")
-    echo -e "TAG\tNAME\tPUBLISHED\tDRAFT"
-    curl -s "https://codeberg.org/api/v1/repos/webbografico/webbografico/releases" \
-      -H "Authorization: token ${TOKEN}" | \
-      jq -r '.[] | "\(.tag_name)\t\(.name)\t\(.published_at)\t\(.draft)"' | \
-      column -t -s $'\t'
+    gh release list -R applewebbo/webbografico
 
 # Show release details
-[group: 'codeberg']
+[group: 'github']
 release-show tag:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    TOKEN=$(grep "^CODEBERG_API_TOKEN=" .env | cut -d'=' -f2 | tr -d '"' | tr -d "'")
-    curl -s "https://codeberg.org/api/v1/repos/webbografico/webbografico/releases/tags/{{tag}}" \
-      -H "Authorization: token ${TOKEN}" | \
-      jq -r '"\nTag: \(.tag_name)\nName: \(.name)\nPublished: \(.published_at)\nDraft: \(.draft)\nPrerelease: \(.prerelease)\n\nURL: \(.html_url)\n\nBody:\n\(.body)\n"'
+    gh release view -R applewebbo/webbografico {{tag}}
 
-# Create a new release (auto-creates tag, pushes it, and generates notes from commits)
-[group: 'codeberg']
+# Create a new release (auto-creates tag and generates notes from commits)
+[group: 'github']
 release-create tag previous_tag="" draft="false" prerelease="false":
     #!/usr/bin/env bash
     set -euo pipefail
 
-    # Check if tag already exists locally
+    # Create tag on current commit if missing
     if git rev-parse "{{tag}}" >/dev/null 2>&1; then
         echo "✓ Tag {{tag}} already exists locally"
     else
         echo "📝 Creating tag {{tag}} on current commit..."
         git tag "{{tag}}"
-        echo "✓ Tag {{tag}} created"
     fi
 
     # Push tag to origin
     echo "📤 Pushing tag {{tag}} to origin..."
-    if git push origin "{{tag}}" 2>&1 | grep -q "already exists"; then
-        echo "✓ Tag {{tag}} already exists on remote"
-    else
-        echo "✓ Tag {{tag}} pushed to origin"
-    fi
+    git push origin "{{tag}}" || true
 
-    # Get token
-    TOKEN=$(grep "^CODEBERG_API_TOKEN=" .env | cut -d'=' -f2 | tr -d '"' | tr -d "'")
+    # Build gh release flags
+    FLAGS="--generate-notes"
+    [ "{{previous_tag}}" != "" ] && FLAGS="$FLAGS --notes-start-tag {{previous_tag}}"
+    [ "{{draft}}" = "true" ] && FLAGS="$FLAGS --draft"
+    [ "{{prerelease}}" = "true" ] && FLAGS="$FLAGS --prerelease"
 
-    # Determine previous tag if not provided
-    if [ "{{previous_tag}}" = "" ]; then
-        PREV_TAG=$(git tag --sort=-version:refname | grep -v "{{tag}}" | head -1)
-    else
-        PREV_TAG="{{previous_tag}}"
-    fi
-
-    echo "🔍 Generating release notes (comparing with ${PREV_TAG})..."
-
-    # Generate release notes from commits
-    COMMITS=$(git log ${PREV_TAG}..{{tag}} --pretty=format:"- %s" --reverse 2>/dev/null || echo "- Initial release")
-
-    # Parse commits into categories
-    FEATURES=$(echo "$COMMITS" | grep -E "^- (✨|feat)" || true)
-    FIXES=$(echo "$COMMITS" | grep -E "^- (🐛|fix)" || true)
-    CHORES=$(echo "$COMMITS" | grep -E "^- (🔧|chore|📦|build|🎨)" || true)
-    TESTS=$(echo "$COMMITS" | grep -E "^- (🧪|test|✅)" || true)
-    DOCS=$(echo "$COMMITS" | grep -E "^- (📚|docs)" || true)
-
-    # Build release body
-    NL=$'\n'
-    BODY="## What's New in {{tag}}${NL}${NL}"
-
-    if [ -n "$FEATURES" ]; then
-        BODY+="### 🚀 Features${NL}$FEATURES${NL}${NL}"
-    fi
-
-    if [ -n "$FIXES" ]; then
-        BODY+="### 🐛 Bug Fixes${NL}$FIXES${NL}${NL}"
-    fi
-
-    if [ -n "$CHORES" ]; then
-        BODY+="### 🛠️ Maintenance${NL}$CHORES${NL}${NL}"
-    fi
-
-    if [ -n "$TESTS" ]; then
-        BODY+="### 🧪 Testing${NL}$TESTS${NL}${NL}"
-    fi
-
-    if [ -n "$DOCS" ]; then
-        BODY+="### 📖 Documentation${NL}$DOCS${NL}${NL}"
-    fi
-
-    BODY+="### 📖 Full Changelog${NL}https://codeberg.org/webbografico/webbografico/compare/${PREV_TAG}...{{tag}}"
-
-    # Create release via API
-    echo "🚀 Creating release on Codeberg..."
-    curl -s -X POST "https://codeberg.org/api/v1/repos/webbografico/webbografico/releases" \
-      -H "Authorization: token ${TOKEN}" \
-      -H "Content-Type: application/json" \
-      -d "$(jq -n \
-        --arg tag "{{tag}}" \
-        --arg body "$BODY" \
-        --argjson draft {{draft}} \
-        --argjson prerelease {{prerelease}} \
-        '{tag_name: $tag, name: $tag, body: $body, draft: $draft, prerelease: $prerelease}'
-      )" | jq -r '"\n✓ Release created successfully!\nURL: \(.html_url)\n"'
+    echo "🚀 Creating release on GitHub..."
+    gh release create "{{tag}}" -R applewebbo/webbografico --title "{{tag}}" $FLAGS
 
 # Delete a release (use with caution!)
-[group: 'codeberg']
+[group: 'github']
 release-delete tag:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    TOKEN=$(grep "^CODEBERG_API_TOKEN=" .env | cut -d'=' -f2 | tr -d '"' | tr -d "'")
-    echo "⚠️  Deleting release {{tag}}..."
-    curl -X DELETE "https://codeberg.org/api/v1/repos/webbografico/webbografico/releases/tags/{{tag}}" \
-      -H "Authorization: token ${TOKEN}"
-    echo "✓ Release {{tag}} deleted"
+    gh release delete -R applewebbo/webbografico "{{tag}}" --yes
